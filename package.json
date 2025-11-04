@@ -8,6 +8,8 @@
     "@redocly/cli": "^2.0.5"
   },
   "scripts": {
-    "lint": "redocly lint routehub.yaml"
+    "lint": "redocly lint routehub.yaml",
+    "bundle-yaml": "redocly bundle -o rhbundle.yaml routehub.yaml",
+    "bundle-json": "redocly bundle -o rhbundle.json routehub.yaml"
   }
 }
