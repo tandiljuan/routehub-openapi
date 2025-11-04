@@ -37,3 +37,6 @@ paths:
 
   /fleets:      { $ref: "routehub/fleets.yaml#/paths/~1fleets" }
   /fleets/{id}: { $ref: "routehub/fleets.yaml#/paths/~1fleets~1{id}" }
+
+  /drivers:      { $ref: "routehub/drivers.yaml#/paths/~1drivers" }
+  /drivers/{id}: { $ref: "routehub/drivers.yaml#/paths/~1drivers~1{id}" }
