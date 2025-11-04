@@ -1,0 +1,182 @@
+# ===================
+# Vehicles Components
+# ===================
+
+components:
+
+  schemas:
+
+    vehicle:
+      description: Vehicle Entity Definition
+      type: object
+      required:
+        - name
+      properties:
+        name:
+          type: string
+        volume:
+          type: number
+        volume_unit:
+          type: string
+          enum:
+            - CUBIC_CENTIMETER
+            - CUBIC_METER
+            - LITER
+            - CUBIC_INCH
+            - CUBIC_FEET
+            - GALLON
+        consumption:
+          type: number
+        consumption_unit:
+          type: string
+          enum:
+            - LITERS_PER_100KM
+            - KILOMETERS_PER_LITER
+            - MILES_PER_GALLON
+            - GALLONS_PER_MILE
+        category_type:
+          type: string
+          enum:
+            - TRUCK
+            - VAN
+            - PICKUP
+            - MOTORCYCLE
+            - BICYCLE
+        engine_type:
+          type: string
+          enum:
+            - GASOLINE
+            - DIESEL
+            - CNG # GNC
+            - ELECTRIC
+            - MECHANIC # Human Powered
+
+
+# =====================
+# Vehicles Paths (CRUD)
+# =====================
+
+paths:
+
+  /vehicles:
+    summary: Manage Vehicle Information.
+    description: This endpoint allows clients to retrieve a list of vehicles, add new vehicles, and manage existing vehicle data. It supports both retrieval and submission of vehicle information.
+
+    get:
+      operationId: vehicles-get
+      tags: [ vehicles ]
+      summary: Retrieve a List of Vehicles.
+      description: Fetches a list of all vehicles registered in the system. The response includes details such as vehicle name, volume, consumption, and category type.
+      responses:
+        "200":
+          description: A list of vehicles successfully retrieved.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  allOf:
+                    - $ref: "components.yaml#/components/schemas/id_number"
+                    - $ref: "#/components/schemas/vehicle"
+        "403":
+          description: Access to the requested resource is forbidden.
+          content:
+            application/json:
+              schema:
+                $ref: "components.yaml#/components/schemas/generic"
+
+    post:
+      operationId: vehicles-post
+      tags: [ vehicles ]
+      summary: Add a New Vehicle.
+      description: Submits a new vehicle to the system. The request must include vehicle details such as name, volume, consumption, and engine type. A successful response returns the newly created vehicle's information.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/vehicle"
+      responses:
+        "200":
+          description: Vehicle successfully added.
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - $ref: "components.yaml#/components/schemas/id_number"
+                  - $ref: "#/components/schemas/vehicle"
+        "403":
+          description: Access to the requested resource is forbidden.
+          content:
+            application/json:
+              schema:
+                $ref: "components.yaml#/components/schemas/generic"
+
+  /vehicles/{id}:
+    parameters:
+      - $ref: "components.yaml#/components/parameters/path_id_number"
+
+    get:
+      operationId: vehicles-id-get
+      tags: [ vehicles ]
+      summary: Retrieve Vehicle Information by ID.
+      description: Fetches detailed information about a specific vehicle identified by its unique ID. The response includes all relevant vehicle details such as name, volume, consumption, and engine type.
+      responses:
+        "200":
+          description: Vehicle information successfully retrieved.
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - $ref: "components.yaml#/components/schemas/id_number"
+                  - $ref: "#/components/schemas/vehicle"
+        "404":
+          description: Vehicle not found with the provided ID.
+          content:
+            application/json:
+              schema:
+                $ref: "components.yaml#/components/schemas/generic"
+
+    patch:
+      operationId: vehicles-id-put
+      tags: [ vehicles ]
+      summary: Update Vehicle Information by ID.
+      description: Updates the details of an existing vehicle identified by its unique ID. The request must include the updated vehicle information. A successful response returns the updated vehicle's information.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/vehicle"
+      responses:
+        "200":
+          description: Vehicle information successfully updated.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/vehicle"
+        "404":
+          description: Vehicle not found with the provided ID.
+          content:
+            application/json:
+              schema:
+                $ref: "components.yaml#/components/schemas/generic"
+
+    delete:
+      operationId: vehicles-id-delete
+      tags: [ vehicles ]
+      summary: Delete Vehicle by ID.
+      description: Deletes a specific vehicle identified by its unique ID from the system. A successful response indicates that the vehicle has been removed.
+      responses:
+        "200":
+          description: Vehicle successfully deleted.
+          content:
+            application/json:
+              schema:
+                $ref: "components.yaml#/components/schemas/generic"
+        "404":
+          description: Vehicle not found with the provided ID.
+          content:
+            application/json:
+              schema:
+                $ref: "components.yaml#/components/schemas/generic"

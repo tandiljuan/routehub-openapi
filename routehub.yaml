@@ -30,4 +30,7 @@ components:
 security:
   - oAuth2Gateway: [] # <- No Scopes
 
-paths: {}
+paths:
+
+  /vehicles:      { $ref: "routehub/vehicles.yaml#/paths/~1vehicles" }
+  /vehicles/{id}: { $ref: "routehub/vehicles.yaml#/paths/~1vehicles~1{id}" }
