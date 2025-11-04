@@ -1,0 +1,43 @@
+# ===================
+# Reusable Components
+# ===================
+
+components:
+
+
+  # -------
+  # Schemas
+  # -------
+
+  schemas:
+
+    generic:
+      description: Generic Response Object
+      type: object
+      properties:
+        code:
+          type: integer
+        message:
+          type: string
+
+    id_number:
+      description: Entity Identification by Number
+      type: object
+      properties:
+        id:
+          type: integer
+
+
+  # ----------
+  # Parameters
+  # ----------
+
+  parameters:
+
+    path_id_number:
+      description: Entity Identification by Number
+      in: path
+      name: id
+      required: true
+      schema:
+        type: integer
