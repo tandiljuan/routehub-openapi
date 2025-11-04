@@ -53,6 +53,8 @@ paths:
                   allOf:
                     - $ref: "components.yaml#/components/schemas/id_number"
                     - $ref: "#/components/schemas/fleet"
+              examples:
+                $ref: "fleets_examples.yaml#/list/200"
         "403":
           description: Access to the requested resource is forbidden.
           content:
@@ -80,6 +82,8 @@ paths:
                 allOf:
                   - $ref: "components.yaml#/components/schemas/id_number"
                   - $ref: "#/components/schemas/fleet"
+              examples:
+                $ref: "fleets_examples.yaml#/unit/200"
         "403":
           description: Access to the requested resource is forbidden.
           content:
@@ -105,6 +109,8 @@ paths:
                 allOf:
                   - $ref: "components.yaml#/components/schemas/id_number"
                   - $ref: "#/components/schemas/fleet"
+              examples:
+                $ref: "fleets_examples.yaml#/unit/200"
         "404":
           description: Fleet not found with the provided ID.
           content:
@@ -130,6 +136,8 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/fleet"
+              examples:
+                $ref: "fleets_examples.yaml#/unit/200"
         "404":
           description: Fleet not found with the provided ID.
           content:
