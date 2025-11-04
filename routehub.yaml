@@ -1,0 +1,33 @@
+openapi: 3.0.0
+info:
+  title: RouteHub REST API
+  description: RouteHub is a user-friendly API designed to serve as a central access point for clients seeking efficient routes planning.
+  version: 0.1.0
+  license:
+    name: GNU Affero General Public License
+    url: https://www.gnu.org/licenses/agpl-3.0.html
+
+servers:
+  - url: http://www.routehub.com:3000
+
+components:
+  securitySchemes:
+    # @TODO: Research the best OAuth2 design for this API
+    # https://swagger.io/docs/specification/v3_0/authentication/oauth2/
+    # https://developers.google.com/identity/protocols/oauth2/native-app
+    # https://developers.google.com/identity/protocols/oauth2/limited-input-device
+    # https://api.slack.com/authentication/oauth-v2
+    oAuth2Gateway:
+      type: oauth2
+      description: This API uses OAuth 2 with the Authorization Code flow.
+      flows:
+        authorizationCode:
+          authorizationUrl: /oauth2/authorize # <- Relative Endpoint URL
+          tokenUrl: /oauth/token # <-------------- Relative Endpoint URL
+          scopes: {} # <-------------------------- No Scopes
+
+# Enforce security policies at a global level
+security:
+  - oAuth2Gateway: [] # <- No Scopes
+
+paths: {}
