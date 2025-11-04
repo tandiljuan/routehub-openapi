@@ -93,6 +93,8 @@ paths:
                   allOf:
                     - $ref: "components.yaml#/components/schemas/id_number"
                     - $ref: "#/components/schemas/delivery_lot"
+              examples:
+                $ref: "delivery-lots_examples.yaml#/list/200"
         "403":
           description: Access to the requested resource is forbidden.
           content:
@@ -120,6 +122,8 @@ paths:
                 allOf:
                   - $ref: "components.yaml#/components/schemas/id_number"
                   - $ref: "#/components/schemas/delivery_lot"
+              examples:
+                $ref: "delivery-lots_examples.yaml#/lot/200"
         "403":
           description: Access to the requested resource is forbidden.
           content:
@@ -145,6 +149,8 @@ paths:
                 allOf:
                   - $ref: "components.yaml#/components/schemas/id_number"
                   - $ref: "#/components/schemas/delivery_lot"
+              examples:
+                $ref: "delivery-lots_examples.yaml#/lot/200"
         "404":
           description: The specified delivery lot was not found.
           content:
@@ -170,6 +176,8 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/delivery_lot"
+              examples:
+                $ref: "delivery-lots_examples.yaml#/lot/200"
         "404":
           description: The specified delivery lot was not found.
           content:
@@ -212,6 +220,8 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/delivery_plan"
+              examples:
+                $ref: "delivery-lots_examples.yaml#/plan/200"
         "404":
           description: The specified delivery lot or its plan was not found.
           content:
