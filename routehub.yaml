@@ -34,3 +34,6 @@ paths:
 
   /vehicles:      { $ref: "routehub/vehicles.yaml#/paths/~1vehicles" }
   /vehicles/{id}: { $ref: "routehub/vehicles.yaml#/paths/~1vehicles~1{id}" }
+
+  /fleets:      { $ref: "routehub/fleets.yaml#/paths/~1fleets" }
+  /fleets/{id}: { $ref: "routehub/fleets.yaml#/paths/~1fleets~1{id}" }
