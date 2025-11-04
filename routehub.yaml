@@ -43,3 +43,6 @@ paths:
 
   /milestones:      { $ref: "routehub/milestones.yaml#/paths/~1milestones" }
   /milestones/{id}: { $ref: "routehub/milestones.yaml#/paths/~1milestones~1{id}" }
+
+  /deliveries:      { $ref: "routehub/deliveries.yaml#/paths/~1deliveries" }
+  /deliveries/{id}: { $ref: "routehub/deliveries.yaml#/paths/~1deliveries~1{id}" }
