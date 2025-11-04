@@ -1,0 +1,64 @@
+# ============================
+# Deliveries Response Examples
+# ============================
+
+# -------
+# Objects
+# -------
+
+delivery:
+
+  "1.0": &delivery1.0
+    id: 1
+    delivery_method: "DELIVERY"
+    milestone_id: 1
+    destination: "37.7749,-122.4194"
+    schedule: ["DTSTART:20240704T120000Z"]
+    width: 10
+    height: 20
+    depth: 30
+    length_unit: "CENTIMETER"
+    volume: 6000
+    volume_unit: "CUBIC_CENTIMETER"
+    weight: 1000
+    weight_unit: "GRAMS"
+  "1.1": &delivery1.1
+    <<: *delivery1.0
+    width: 15
+    height: 25
+    depth: 35
+    volume: 6500
+    weight: 1500
+
+# -----
+# Lists
+# -----
+
+list:
+
+  "200":
+    empty:
+      summary: An empty list of deliveries
+      value: []
+    list-1.0:
+      summary: "A list with the delivery #1"
+      value:
+        - *delivery1.0
+    list-1.1:
+      summary: "A list with the updated delivery #1"
+      value:
+        - *delivery1.1
+
+# -----
+# Units
+# -----
+
+unit:
+
+  "200":
+    delivery-1.0:
+      summary: "Delivery #1"
+      value: *delivery1.0
+    delivery-1.1:
+      summary: "Delivery #1 (updated)"
+      value: *delivery1.1
