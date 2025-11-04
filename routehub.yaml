@@ -40,3 +40,6 @@ paths:
 
   /drivers:      { $ref: "routehub/drivers.yaml#/paths/~1drivers" }
   /drivers/{id}: { $ref: "routehub/drivers.yaml#/paths/~1drivers~1{id}" }
+
+  /milestones:      { $ref: "routehub/milestones.yaml#/paths/~1milestones" }
+  /milestones/{id}: { $ref: "routehub/milestones.yaml#/paths/~1milestones~1{id}" }

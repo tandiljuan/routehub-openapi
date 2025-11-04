@@ -1,0 +1,156 @@
+# =====================
+# Milestones Components
+# =====================
+
+components:
+
+  schemas:
+
+    milestone:
+      description: Driver Entity Definition
+      type: object
+      properties:
+        name:
+          type: string
+        location:
+          description: "ISO 6709:DD (Standard representation of geographic point location by coordinates)"
+          type: string
+        milestone_category:
+          description: The type of location associated with the milestone.
+          type: string
+          enum:
+            - DEPOT
+            - DISTRIBUTION_CENTER
+            - LOADING_POINT
+            - WAREHOUSE
+            - TRANSFER_POINT
+
+
+# =======================
+# Milestones Paths (CRUD)
+# =======================
+
+paths:
+
+  /milestones:
+    summary: Operations related to milestones.
+    description: This resource allows for the retrieval and creation of milestone entities.
+
+    get:
+      operationId: milestones-get
+      tags: [ milestones ]
+      summary: Retrieve all milestones.
+      description: Retrieves a list of all existing milestones.
+      responses:
+        "200":
+          description: A list of milestones.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  allOf:
+                    - $ref: "components.yaml#/components/schemas/id_number"
+                    - $ref: "#/components/schemas/milestone"
+        "403":
+          description: Access to the requested resource is forbidden.
+          content:
+            application/json:
+              schema:
+                $ref: "components.yaml#/components/schemas/generic"
+
+    post:
+      operationId: milestones-post
+      tags: [ milestones ]
+      summary: Create a new milestone.
+      description: Creates a new milestone based on the provided data.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/milestone"
+      responses:
+        "200":
+          description: Successfully created milestone with its assigned ID.
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - $ref: "components.yaml#/components/schemas/id_number"
+                  - $ref: "#/components/schemas/milestone"
+        "403":
+          description: Access to the requested resource is forbidden.
+          content:
+            application/json:
+              schema:
+                $ref: "components.yaml#/components/schemas/generic"
+
+  /milestones/{id}:
+    parameters:
+      - $ref: "components.yaml#/components/parameters/path_id_number"
+
+    get:
+      operationId: milestones-id-get
+      tags: [ milestones ]
+      summary: Retrieve a specific milestone by ID.
+      description: Retrieves a single milestone identified by its unique ID.
+      responses:
+        "200":
+          description: Successfully retrieved milestone.
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - $ref: "components.yaml#/components/schemas/id_number"
+                  - $ref: "#/components/schemas/milestone"
+        "404":
+          description: Milestone not found.
+          content:
+            application/json:
+              schema:
+                $ref: "components.yaml#/components/schemas/generic"
+
+    patch:
+      operationId: milestones-id-put
+      tags: [ milestones ]
+      summary: Update a specific milestone by ID.
+      description: Updates an existing milestone identified by its unique ID.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/milestone"
+      responses:
+        "200":
+          description: Successfully updated milestone.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/milestone"
+        "404":
+          description: Milestone not found.
+          content:
+            application/json:
+              schema:
+                $ref: "components.yaml#/components/schemas/generic"
+
+    delete:
+      operationId: milestones-id-delete
+      tags: [ milestones ]
+      summary: Delete a specific milestone by ID.
+      description: Deletes an existing milestone identified by its unique ID.
+      responses:
+        "200":
+          description: Successfully deleted milestone.
+          content:
+            application/json:
+              schema:
+                $ref: "components.yaml#/components/schemas/generic"
+        "404":
+          description: Milestone not found.
+          content:
+            application/json:
+              schema:
+                $ref: "components.yaml#/components/schemas/generic"
