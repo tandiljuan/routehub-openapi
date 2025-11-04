@@ -46,3 +46,7 @@ paths:
 
   /deliveries:      { $ref: "routehub/deliveries.yaml#/paths/~1deliveries" }
   /deliveries/{id}: { $ref: "routehub/deliveries.yaml#/paths/~1deliveries~1{id}" }
+
+  /lots:           { $ref: "routehub/delivery-lots.yaml#/paths/~1lots" }
+  /lots/{id}:      { $ref: "routehub/delivery-lots.yaml#/paths/~1lots~1{id}" }
+  /lots/{id}/plan: { $ref: "routehub/delivery-lots.yaml#/paths/~1lots~1{id}~1plan" }
