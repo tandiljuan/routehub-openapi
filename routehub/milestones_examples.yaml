@@ -1,0 +1,52 @@
+# ============================
+# Milestones Response Examples
+# ============================
+
+# -------
+# Objects
+# -------
+
+milestone:
+
+  "1.0": &milestone1.0
+    id: 1
+    name: "Main Depot"
+    location: "37.7749,-122.4194"
+    milestone_category: "DEPOT"
+  "1.1": &milestone1.1
+    <<: *milestone1.0
+    name: "Main Distribution Point"
+    milestone_category: "DISTRIBUTION_CENTER"
+
+# -----
+# Lists
+# -----
+
+list:
+
+  "200":
+    empty:
+      summary: An empty list of milestones
+      value: []
+    list-1.0:
+      summary: "A list with the milestone #1"
+      value:
+        - *milestone1.0
+    list-1.1:
+      summary: "A list with the updated milestone #1"
+      value:
+        - *milestone1.1
+
+# -----
+# Units
+# -----
+
+unit:
+
+  "200":
+    milestone-1.0:
+      summary: "Milestone #1"
+      value: *milestone1.0
+    milestone-1.1:
+      summary: "Milestone #1 (updated)"
+      value: *milestone1.1

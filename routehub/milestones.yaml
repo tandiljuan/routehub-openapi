@@ -52,6 +52,8 @@ paths:
                   allOf:
                     - $ref: "components.yaml#/components/schemas/id_number"
                     - $ref: "#/components/schemas/milestone"
+              examples:
+                $ref: "milestones_examples.yaml#/list/200"
         "403":
           description: Access to the requested resource is forbidden.
           content:
@@ -79,6 +81,8 @@ paths:
                 allOf:
                   - $ref: "components.yaml#/components/schemas/id_number"
                   - $ref: "#/components/schemas/milestone"
+              examples:
+                $ref: "milestones_examples.yaml#/unit/200"
         "403":
           description: Access to the requested resource is forbidden.
           content:
@@ -104,6 +108,8 @@ paths:
                 allOf:
                   - $ref: "components.yaml#/components/schemas/id_number"
                   - $ref: "#/components/schemas/milestone"
+              examples:
+                $ref: "milestones_examples.yaml#/unit/200"
         "404":
           description: Milestone not found.
           content:
@@ -129,6 +135,8 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/milestone"
+              examples:
+                $ref: "milestones_examples.yaml#/unit/200"
         "404":
           description: Milestone not found.
           content:
