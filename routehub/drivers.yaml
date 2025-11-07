@@ -1,0 +1,189 @@
+# ==================
+# Drivers Components
+# ==================
+
+components:
+
+  schemas:
+
+    driver_vehicle:
+      description: Driver-Vehicle Entity Definition
+      type: object
+      properties:
+        vehicle_id:
+          type: integer
+        quantity:
+          type: integer
+
+    driver:
+      description: Driver Entity Definition
+      type: object
+      properties:
+        first_name:
+          type: string
+        last_name:
+          type: string
+        work_schedules:
+          description: "List of work schedules"
+          type: array
+          items:
+            description: "RFC 5545 (iCalendar: Internet Calendaring and Scheduling Core Object Specification)"
+            type: string
+        start_point:
+          description: "ISO 6709:DD (Standard representation of geographic point location by coordinates)"
+          type: string
+        work_areas:
+          description: "A collection of geographic working areas."
+          type: array
+          items:
+            description: |
+              A single working area expressed as an ordered list of ISO 6709:DD
+              (latitude/longitude coordinates in decimal‑degrees format). The list
+              must contain at least three points, forming a closed polygon.
+            type: array
+            minItems: 3
+            items:
+              description: "ISO 6709:DD (geographic point)"
+              type: string
+        vehicles:
+          type: array
+          items:
+            - $ref: "#/components/schemas/driver_vehicle"
+
+
+# ====================
+# Drivers Paths (CRUD)
+# ====================
+
+paths:
+
+  /drivers:
+    summary: Driver collection endpoint.
+    description: This endpoint allows retrieving, creating, and managing a collection of driver resources.
+
+    get:
+      operationId: drivers-get
+      tags: [ drivers ]
+      summary: Retrieve all drivers.
+      description: Retrieves a list of all drivers.
+      responses:
+        "200":
+          description: A list of drivers.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  allOf:
+                    - $ref: "components.yaml#/components/schemas/id_number"
+                    - $ref: "#/components/schemas/driver"
+              examples:
+                $ref: "drivers_examples.yaml#/list/200"
+        "403":
+          description: Access to the requested resource is forbidden.
+          content:
+            application/json:
+              schema:
+                $ref: "components.yaml#/components/schemas/generic"
+
+    post:
+      operationId: drivers-post
+      tags: [ drivers ]
+      summary: Create a new driver.
+      description: Creates a new driver resource.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/driver"
+      responses:
+        "200":
+          description: The newly created driver.
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - $ref: "components.yaml#/components/schemas/id_number"
+                  - $ref: "#/components/schemas/driver"
+              examples:
+                $ref: "drivers_examples.yaml#/unit/200"
+        "403":
+          description: Access to the requested resource is forbidden.
+          content:
+            application/json:
+              schema:
+                $ref: "components.yaml#/components/schemas/generic"
+
+  /drivers/{id}:
+    parameters:
+      - $ref: "components.yaml#/components/parameters/path_id_number"
+
+    get:
+      operationId: drivers-id-get
+      tags: [ drivers ]
+      summary: Retrieve a driver by ID.
+      description: Retrieves a specific driver by its ID.
+      responses:
+        "200":
+          description: The requested driver.
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - $ref: "components.yaml#/components/schemas/id_number"
+                  - $ref: "#/components/schemas/driver"
+              examples:
+                $ref: "drivers_examples.yaml#/unit/200"
+        "404":
+          description: Driver not found.
+          content:
+            application/json:
+              schema:
+                $ref: "components.yaml#/components/schemas/generic"
+
+    patch:
+      operationId: drivers-id-put
+      tags: [ drivers ]
+      summary: Update a driver by ID.
+      description: Updates an existing driver resource identified by its ID.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/driver"
+      responses:
+        "200":
+          description: The updated driver.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/driver"
+              examples:
+                $ref: "drivers_examples.yaml#/unit/200"
+        "404":
+          description: Driver not found.
+          content:
+            application/json:
+              schema:
+                $ref: "components.yaml#/components/schemas/generic"
+
+    delete:
+      operationId: drivers-id-delete
+      tags: [ drivers ]
+      summary: Delete a driver by ID.
+      description: Deletes a specific driver by its ID.
+      responses:
+        "200":
+          description: Driver successfully deleted.
+          content:
+            application/json:
+              schema:
+                $ref: "components.yaml#/components/schemas/generic"
+        "404":
+          description: Driver not found.
+          content:
+            application/json:
+              schema:
+                $ref: "components.yaml#/components/schemas/generic"

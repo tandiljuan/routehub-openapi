@@ -1,0 +1,81 @@
+# ===============================
+# Delivery Lots Response Examples
+# ===============================
+
+# -------
+# Objects
+# -------
+
+delivery-lot:
+
+  "1.0": &delivery-lot1.0
+    id: 1
+    milestone_id: 1
+    deliveries:
+      - 1
+    fleet_id: 1
+    drivers:
+      - 1
+    state: "UNPROCESSED"
+  "1.1": &delivery-lot1.1
+    <<: *delivery-lot1.0
+    deliveries:
+      - 1
+      - 2
+
+
+delivery-plan:
+
+  "1.0": &delivery-plan1.0
+    delivery_lot_id: 1
+    delivery_paths:
+      - milestone_id: 1
+        vehicle_id: 1
+        driver_id: 1
+        delivery_units:
+          - 1
+          - 2
+
+# -----
+# Lists
+# -----
+
+list:
+
+  "200":
+    empty:
+      summary: An empty list of delivery-lots
+      value: []
+    list-1.0:
+      summary: "A list with the delivery-lot #1"
+      value:
+        - *delivery-lot1.0
+    list-1.1:
+      summary: "A list with the updated delivery-lot #1"
+      value:
+        - *delivery-lot1.1
+
+# ----
+# Lots
+# ----
+
+lot:
+
+  "200":
+    delivery-lot-1.0:
+      summary: "Delivery Lot #1"
+      value: *delivery-lot1.0
+    delivery-lot-1.1:
+      summary: "Delivery Lot #1 (updated)"
+      value: *delivery-lot1.1
+
+# ----
+# Plan
+# ----
+
+plan:
+
+  "200":
+    delivery-plan-1.0:
+      summary: "Delivery Plan #1"
+      value: *delivery-plan1.0

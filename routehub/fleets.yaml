@@ -1,0 +1,165 @@
+# =================
+# Fleets Components
+# =================
+
+components:
+
+  schemas:
+
+    fleet_vehicle:
+      description: Fleet-Vehicle Entity Definition
+      type: object
+      properties:
+        vehicle_id:
+          type: integer
+        quantity:
+          type: integer
+
+    fleet:
+      description: Fleet Entity Definition
+      type: object
+      properties:
+        name:
+          type: string
+        vehicles:
+          type: array
+          items:
+            - $ref: "#/components/schemas/fleet_vehicle"
+
+
+# ===================
+# Fleets Paths (CRUD)
+# ===================
+
+paths:
+
+  /fleets:
+    summary: Manage Fleet Information.
+    description: This endpoint allows clients to retrieve a list of fleets, add new fleets, and manage existing fleet data. It supports both retrieval and submission of fleet information, including details such as fleet name and associated vehicles.
+
+    get:
+      operationId: fleets-get
+      tags: [ fleets ]
+      summary: Retrieve a List of Fleets.
+      description: Fetches a list of all fleets registered in the system. The response includes details such as fleet name and the vehicles associated with each fleet.
+      responses:
+        "200":
+          description: A list of fleets successfully retrieved.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  allOf:
+                    - $ref: "components.yaml#/components/schemas/id_number"
+                    - $ref: "#/components/schemas/fleet"
+              examples:
+                $ref: "fleets_examples.yaml#/list/200"
+        "403":
+          description: Access to the requested resource is forbidden.
+          content:
+            application/json:
+              schema:
+                $ref: "components.yaml#/components/schemas/generic"
+
+    post:
+      operationId: fleets-post
+      tags: [ fleets ]
+      summary: Add a New Fleet.
+      description: Submits a new fleet to the system. The request must include fleet details such as name and associated vehicles. A successful response returns the newly created fleet's information.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/fleet"
+      responses:
+        "200":
+          description: Fleet successfully added.
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - $ref: "components.yaml#/components/schemas/id_number"
+                  - $ref: "#/components/schemas/fleet"
+              examples:
+                $ref: "fleets_examples.yaml#/unit/200"
+        "403":
+          description: Access to the requested resource is forbidden.
+          content:
+            application/json:
+              schema:
+                $ref: "components.yaml#/components/schemas/generic"
+
+  /fleets/{id}:
+    parameters:
+      - $ref: "components.yaml#/components/parameters/path_id_number"
+
+    get:
+      operationId: fleets-id-get
+      tags: [ fleets ]
+      summary: Retrieve Fleet Information by ID.
+      description: Fetches detailed information about a specific fleet identified by its unique ID. The response includes all relevant fleet details such as name and associated vehicles.
+      responses:
+        "200":
+          description: Fleet information successfully retrieved.
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - $ref: "components.yaml#/components/schemas/id_number"
+                  - $ref: "#/components/schemas/fleet"
+              examples:
+                $ref: "fleets_examples.yaml#/unit/200"
+        "404":
+          description: Fleet not found with the provided ID.
+          content:
+            application/json:
+              schema:
+                $ref: "components.yaml#/components/schemas/generic"
+
+    patch:
+      operationId: fleets-id-put
+      tags: [ fleets ]
+      summary: Update Fleet Information by ID.
+      description: Updates the details of an existing fleet identified by its unique ID. The request must include the updated fleet information. A successful response returns the updated fleet's information.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/fleet"
+      responses:
+        "200":
+          description: Fleet information successfully updated.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/fleet"
+              examples:
+                $ref: "fleets_examples.yaml#/unit/200"
+        "404":
+          description: Fleet not found with the provided ID.
+          content:
+            application/json:
+              schema:
+                $ref: "components.yaml#/components/schemas/generic"
+
+    delete:
+      operationId: fleets-id-delete
+      tags: [ fleets ]
+      summary: Delete Fleet by ID.
+      description: Deletes a specific fleet identified by its unique ID from the system. A successful response indicates that the fleet has been removed.
+      responses:
+        "200":
+          description: Fleet successfully deleted.
+          content:
+            application/json:
+              schema:
+                $ref: "components.yaml#/components/schemas/generic"
+        "404":
+          description: Fleet not found with the provided ID.
+          content:
+            application/json:
+              schema:
+                $ref: "components.yaml#/components/schemas/generic"

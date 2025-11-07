@@ -1,0 +1,52 @@
+openapi: 3.0.0
+info:
+  title: RouteHub REST API
+  description: RouteHub is a user-friendly API designed to serve as a central access point for clients seeking efficient routes planning.
+  version: 0.7.0
+  license:
+    name: GNU Affero General Public License
+    url: https://www.gnu.org/licenses/agpl-3.0.html
+
+servers:
+  - url: http://www.routehub.com:3000
+
+components:
+  securitySchemes:
+    # @TODO: Research the best OAuth2 design for this API
+    # https://swagger.io/docs/specification/v3_0/authentication/oauth2/
+    # https://developers.google.com/identity/protocols/oauth2/native-app
+    # https://developers.google.com/identity/protocols/oauth2/limited-input-device
+    # https://api.slack.com/authentication/oauth-v2
+    oAuth2Gateway:
+      type: oauth2
+      description: This API uses OAuth 2 with the Authorization Code flow.
+      flows:
+        authorizationCode:
+          authorizationUrl: /oauth2/authorize # <- Relative Endpoint URL
+          tokenUrl: /oauth/token # <-------------- Relative Endpoint URL
+          scopes: {} # <-------------------------- No Scopes
+
+# Enforce security policies at a global level
+security:
+  - oAuth2Gateway: [] # <- No Scopes
+
+paths:
+
+  /vehicles:      { $ref: "routehub/vehicles.yaml#/paths/~1vehicles" }
+  /vehicles/{id}: { $ref: "routehub/vehicles.yaml#/paths/~1vehicles~1{id}" }
+
+  /fleets:      { $ref: "routehub/fleets.yaml#/paths/~1fleets" }
+  /fleets/{id}: { $ref: "routehub/fleets.yaml#/paths/~1fleets~1{id}" }
+
+  /drivers:      { $ref: "routehub/drivers.yaml#/paths/~1drivers" }
+  /drivers/{id}: { $ref: "routehub/drivers.yaml#/paths/~1drivers~1{id}" }
+
+  /milestones:      { $ref: "routehub/milestones.yaml#/paths/~1milestones" }
+  /milestones/{id}: { $ref: "routehub/milestones.yaml#/paths/~1milestones~1{id}" }
+
+  /deliveries:      { $ref: "routehub/deliveries.yaml#/paths/~1deliveries" }
+  /deliveries/{id}: { $ref: "routehub/deliveries.yaml#/paths/~1deliveries~1{id}" }
+
+  /lots:           { $ref: "routehub/delivery-lots.yaml#/paths/~1lots" }
+  /lots/{id}:      { $ref: "routehub/delivery-lots.yaml#/paths/~1lots~1{id}" }
+  /lots/{id}/plan: { $ref: "routehub/delivery-lots.yaml#/paths/~1lots~1{id}~1plan" }

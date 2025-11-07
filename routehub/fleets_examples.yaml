@@ -1,0 +1,55 @@
+# ========================
+# Fleets Response Examples
+# ========================
+
+# -------
+# Objects
+# -------
+
+fleet:
+
+  "1.0": &fleet1.0
+    id: 1
+    name: "my-fleet"
+    vehicles:
+      - vehicle_id: 1
+        quantity: 2
+  "1.1": &fleet1.1
+    <<: *fleet1.0
+    name: "my-fleet-update"
+    vehicles:
+      - vehicle_id: 2
+        quantity: 3
+
+# -----
+# Lists
+# -----
+
+list:
+
+  "200":
+    empty:
+      summary: An empty list of fleets
+      value: []
+    list-1.0:
+      summary: "A list with the fleet #1"
+      value:
+        - *fleet1.0
+    list-1.1:
+      summary: "A list with the updated fleet #1"
+      value:
+        - *fleet1.1
+
+# -----
+# Units
+# -----
+
+unit:
+
+  "200":
+    fleet-1.0:
+      summary: "Fleet #1"
+      value: *fleet1.0
+    fleet-1.1:
+      summary: "Fleet #1 (updated)"
+      value: *fleet1.1

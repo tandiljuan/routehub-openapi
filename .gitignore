@@ -177,3 +177,7 @@ tags
 [._]*.un~
 
 # End of https://www.toptal.com/developers/gitignore/api/linux,vim,node
+
+### RouteHub ###
+rhbundle.*
+rhmanual.*

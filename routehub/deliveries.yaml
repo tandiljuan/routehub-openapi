@@ -1,0 +1,201 @@
+# =====================
+# Deliveries Components
+# =====================
+
+components:
+
+  schemas:
+
+    delivery:
+      description: Delivery Entity Definition
+      type: object
+      properties:
+        delivery_method:
+          type: string
+          enum:
+            - DELIVERY
+            - PICKUP
+            - SIGNATURE
+        milestone_id:
+          type: integer
+          description: "Origin"
+        destination:
+          type: string
+          description: "ISO 6709:DD (Standard representation of geographic point location by coordinates)"
+        schedule:
+          description: "List of delivery schedules"
+          type: array
+          items:
+            description: "RFC 5545 (iCalendar: Internet Calendaring and Scheduling Core Object Specification)"
+            type: string
+        width:
+          type: number
+        height:
+          type: number
+        depth:
+          type: number
+        length_unit:
+          type: string
+          enum:
+            - CENTIMETER
+            - METER
+            - INCH
+            - FEET
+        volume:
+          type: number
+        volume_unit:
+          type: string
+          enum:
+            - CUBIC_CENTIMETER
+            - CUBIC_METER
+            - LITER
+            - CUBIC_INCH
+            - CUBIC_FEET
+            - GALLON
+        weight:
+          type: number
+        weight_unit:
+          type: string
+          enum:
+            - GRAMS
+            - KILOGRAMS
+            - OUNCES
+            - POUNDS
+
+
+# =======================
+# Deliveries Paths (CRUD)
+# =======================
+
+paths:
+
+  /deliveries:
+    summary: Operations related to Deliveries.
+    description: Allows retrieval and creation of delivery entities.
+
+    get:
+      operationId: deliveries-get
+      tags: [ deliveries ]
+      summary: Retrieve all deliveries.
+      description: Retrieves a list of all delivery entities.
+      responses:
+        "200":
+          description: A list of deliveries.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  allOf:
+                    - $ref: "components.yaml#/components/schemas/id_number"
+                    - $ref: "#/components/schemas/delivery"
+              examples:
+                $ref: "deliveries_examples.yaml#/list/200"
+        "403":
+          description: Access to the requested resource is forbidden.
+          content:
+            application/json:
+              schema:
+                $ref: "components.yaml#/components/schemas/generic"
+
+    post:
+      operationId: deliveries-post
+      tags: [ deliveries ]
+      summary: Create a new delivery.
+      description: Creates a new delivery entity.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/delivery"
+      responses:
+        "200":
+          description: The newly created delivery.
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - $ref: "components.yaml#/components/schemas/id_number"
+                  - $ref: "#/components/schemas/delivery"
+              examples:
+                $ref: "deliveries_examples.yaml#/unit/200"
+        "403":
+          description: Access to the requested resource is forbidden.
+          content:
+            application/json:
+              schema:
+                $ref: "components.yaml#/components/schemas/generic"
+
+  /deliveries/{id}:
+    parameters:
+      - $ref: "components.yaml#/components/parameters/path_id_number"
+
+    get:
+      operationId: deliveries-id-get
+      tags: [ deliveries ]
+      summary: Retrieve a delivery by ID.
+      description: Retrieves a specific delivery entity by its ID.
+      responses:
+        "200":
+          description: The requested delivery.
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - $ref: "components.yaml#/components/schemas/id_number"
+                  - $ref: "#/components/schemas/delivery"
+              examples:
+                $ref: "deliveries_examples.yaml#/unit/200"
+        "404":
+          description: The specified delivery ID was not found.
+          content:
+            application/json:
+              schema:
+                $ref: "components.yaml#/components/schemas/generic"
+
+    patch:
+      operationId: deliveries-id-put
+      tags: [ deliveries ]
+      summary: Update a delivery by ID.
+      description: Updates an existing delivery entity identified by its ID.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/delivery"
+      responses:
+        "200":
+          description: The updated delivery.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/delivery"
+              examples:
+                $ref: "deliveries_examples.yaml#/unit/200"
+        "404":
+          description: The specified delivery ID was not found.
+          content:
+            application/json:
+              schema:
+                $ref: "components.yaml#/components/schemas/generic"
+
+    delete:
+      operationId: deliveries-id-delete
+      tags: [ deliveries ]
+      summary: Delete a delivery by ID.
+      description: Deletes a specific delivery entity identified by its ID.
+      responses:
+        "200":
+          description: Indicates successful deletion.
+          content:
+            application/json:
+              schema:
+                $ref: "components.yaml#/components/schemas/generic"
+        "404":
+          description: The specified delivery ID was not found.
+          content:
+            application/json:
+              schema:
+                $ref: "components.yaml#/components/schemas/generic"

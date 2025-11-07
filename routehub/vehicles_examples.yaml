@@ -1,0 +1,56 @@
+# ==========================
+# Vehicles Response Examples
+# ==========================
+
+# -------
+# Objects
+# -------
+
+vehicle:
+
+  "1.0": &vehicle1.0
+    id: 1
+    name: "pickup"
+    volume: 1230000
+    volume_unit: "CUBIC_CENTIMETER"
+    consumption: 12
+    consumption_unit: "LITERS_PER_100KM"
+    category_type: "PICKUP"
+    engine_type: "DIESEL"
+  "1.1": &vehicle1.1
+    <<: *vehicle1.0
+    name: "pickup-update"
+    consumption: 10
+
+# -----
+# Lists
+# -----
+
+list:
+
+  "200":
+    empty:
+      summary: An empty list of vehicles
+      value: []
+    list-1.0:
+      summary: "A list with the vehicle #1"
+      value:
+        - *vehicle1.0
+    list-1.1:
+      summary: "A list with the updated vehicle #1"
+      value:
+        - *vehicle1.1
+
+# -----
+# Units
+# -----
+
+unit:
+
+  "200":
+    vehicle-1.0:
+      summary: "Vehicle #1"
+      value: *vehicle1.0
+    vehicle-1.1:
+      summary: "Vehicle #1 (updated)"
+      value: *vehicle1.1

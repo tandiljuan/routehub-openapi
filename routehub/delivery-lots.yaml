@@ -1,0 +1,249 @@
+# ========================
+# Delivery Lots Components
+# ========================
+
+components:
+
+  schemas:
+
+    delivery_lot:
+      description: Delivery Lot Entity Definition
+      type: object
+      properties:
+        milestone_id:
+          description: "Location from which the deliveries will depart."
+          type: integer
+        deliveries:
+          description: "List of deliveries in the lot."
+          type: array
+          items:
+            type: integer
+        fleet_id:
+          description: "Fleet designated for distribution."
+          type: integer
+        drivers:
+          description: "List of drivers designated for distribution tasks."
+          type: array
+          items:
+            type: integer
+        state:
+          description: "Current status of the delivery lot."
+          type: string
+          enum:
+            - UNPROCESSED
+            - PROCESSING
+            - PROCESSED
+
+    delivery_path:
+      description: Delivery Path Entity Definition
+      type: object
+      properties:
+        milestone_id:
+          description: "Location from which the delivery will depart."
+          type: integer
+        vehicle_id:
+          description: "Vehicle that will be used for the delivery."
+          type: integer
+        driver_id:
+          description: "Driver assigned to the delivery."
+          type: integer
+        delivery_units:
+          description: "List of items to be delivered."
+          type: array
+          items:
+            type: integer
+
+    delivery_plan:
+      description: Delivery Plan Entity Definition
+      type: object
+      properties:
+        delivery_lot_id:
+          description: "Delivery lot from which the plan is created."
+          type: integer
+        delivery_paths:
+          description: "List of delivery paths."
+          type: array
+          items:
+            $ref: "#/components/schemas/delivery_path"
+
+
+# ==========================
+# Delivery Lots Paths (CRUD)
+# ==========================
+
+paths:
+
+  /lots:
+    summary: Operations related to delivery lots.
+    description: This endpoint allows you to create, retrieve, update, and delete delivery lots.
+
+    get:
+      operationId: delivery-lots-get
+      tags: [ delivery-lots ]
+      summary: Retrieve all delivery lots.
+      description: Returns a list of all delivery lots.
+      responses:
+        "200":
+          description: A list of delivery lots.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  allOf:
+                    - $ref: "components.yaml#/components/schemas/id_number"
+                    - $ref: "#/components/schemas/delivery_lot"
+              examples:
+                $ref: "delivery-lots_examples.yaml#/list/200"
+        "403":
+          description: Access to the requested resource is forbidden.
+          content:
+            application/json:
+              schema:
+                $ref: "components.yaml#/components/schemas/generic"
+
+    post:
+      operationId: delivery-lots-post
+      tags: [ delivery-lots ]
+      summary: Create a new delivery lot.
+      description: Creates a new delivery lot with the provided information.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/delivery_lot"
+      responses:
+        "200":
+          description: The newly created delivery lot.
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - $ref: "components.yaml#/components/schemas/id_number"
+                  - $ref: "#/components/schemas/delivery_lot"
+              examples:
+                $ref: "delivery-lots_examples.yaml#/lot/200"
+        "403":
+          description: Access to the requested resource is forbidden.
+          content:
+            application/json:
+              schema:
+                $ref: "components.yaml#/components/schemas/generic"
+
+  /lots/{id}:
+    parameters:
+      - $ref: "components.yaml#/components/parameters/path_id_number"
+
+    get:
+      operationId: delivery-lots-id-get
+      tags: [ delivery-lots ]
+      summary: Retrieve a delivery lot by its ID.
+      description: Returns a single delivery lot based on the provided ID.
+      responses:
+        "200":
+          description: The requested delivery lot.
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - $ref: "components.yaml#/components/schemas/id_number"
+                  - $ref: "#/components/schemas/delivery_lot"
+              examples:
+                $ref: "delivery-lots_examples.yaml#/lot/200"
+        "404":
+          description: The specified delivery lot was not found.
+          content:
+            application/json:
+              schema:
+                $ref: "components.yaml#/components/schemas/generic"
+
+    patch:
+      operationId: delivery-lots-id-put
+      tags: [ delivery-lots ]
+      summary: Update an existing delivery lot.
+      description: Updates an existing delivery lot with the provided ID and information.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/delivery_lot"
+      responses:
+        "200":
+          description: The updated delivery lot.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/delivery_lot"
+              examples:
+                $ref: "delivery-lots_examples.yaml#/lot/200"
+        "404":
+          description: The specified delivery lot was not found.
+          content:
+            application/json:
+              schema:
+                $ref: "components.yaml#/components/schemas/generic"
+
+    delete:
+      operationId: delivery-lots-id-delete
+      tags: [ delivery-lots ]
+      summary: Delete a delivery lot.
+      description: Deletes the delivery lot with the provided ID.
+      responses:
+        "200":
+          description: Successfully deleted the delivery lot.
+          content:
+            application/json:
+              schema:
+                $ref: "components.yaml#/components/schemas/generic"
+        "404":
+          description: The specified delivery lot was not found.
+          content:
+            application/json:
+              schema:
+                $ref: "components.yaml#/components/schemas/generic"
+
+  /lots/{id}/plan:
+    parameters:
+      - $ref: "components.yaml#/components/parameters/path_id_number"
+
+    get:
+      operationId: delivery-lots-plan-get
+      tags: [ delivery-lots ]
+      summary: Retrieve the delivery plan for a delivery lot.
+      description: Returns the delivery plan associated with a specific delivery lot ID.
+      responses:
+        "200":
+          description: The delivery plan for the specified delivery lot.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/delivery_plan"
+              examples:
+                $ref: "delivery-lots_examples.yaml#/plan/200"
+        "404":
+          description: The specified delivery lot or its plan was not found.
+          content:
+            application/json:
+              schema:
+                $ref: "components.yaml#/components/schemas/generic"
+
+    post:
+      operationId: delivery-lots-plan-post
+      tags: [ delivery-lots ]
+      summary: Generate/Update the delivery plan for a delivery lot.
+      description: Generates or updates the delivery plan based on the delivery lot details.
+      responses:
+        "200":
+          description: Successfully created/updated the delivery plan.
+          content:
+            application/json:
+              schema:
+                $ref: "components.yaml#/components/schemas/generic"
+        "404":
+          description: The specified delivery lot was not found.
+          content:
+            application/json:
+              schema:
+                $ref: "components.yaml#/components/schemas/generic"
