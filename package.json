@@ -12,5 +12,8 @@
     "bundle-yaml": "redocly bundle -o rhbundle.yaml routehub.yaml",
     "bundle-json": "redocly bundle -o rhbundle.json routehub.yaml",
     "build-man": "redocly build-docs -o rhmanual.html routehub.yaml"
+  },
+  "engines": {
+    "node": ">= 20.19"
   }
 }
