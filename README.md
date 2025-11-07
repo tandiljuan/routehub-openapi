@@ -26,3 +26,20 @@ Install the application's dependencies using `npm`:
 ```bash
 npm install
 ```
+
+### NPM Scripts
+
+Below is a list of npm scripts (aliases) for frequently used commands. As a quick reference, remember to prepend `npm run` when executing these scripts.
+
+* `lint`: Analyzes the OpenAPI description to identify potential errors.
+* `bundle-yaml`: Bundles all files belonging to the OpenAPI description into a single YAML file.
+* `bundle-json`: Bundles all files belonging to the OpenAPI description into a single JSON file.
+* `build-man`: Generates documentation from the OpenAPI description.
+
+Currently, the documentation is being built using [Redoc](https://github.com/Redocly/redoc). However, the following are alternative tools we could potentially use:
+
+* [Zudoku](https://github.com/zuplo/zudoku)
+* [xyd](https://github.com/livesession/xyd)
+* [Scalar](https://github.com/scalar/scalar)
+* [Stoplight Elements](https://github.com/stoplightio/elements)
+* [Swagger UI](https://github.com/swagger-api/swagger-ui)
