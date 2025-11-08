@@ -24,7 +24,7 @@ components:
         vehicles:
           type: array
           items:
-            - $ref: "#/components/schemas/fleet_vehicle"
+            $ref: "#/components/schemas/fleet_vehicle"
 
 
 # ===================

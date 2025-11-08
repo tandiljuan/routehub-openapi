@@ -1,4 +1,4 @@
-openapi: 3.0.0
+openapi: 3.1.0
 info:
   title: RouteHub REST API
   description: RouteHub is a user-friendly API designed to serve as a central access point for clients seeking efficient routes planning.
