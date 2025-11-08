@@ -1,7 +1,7 @@
 RouteHub OpenAPI Description
 ============================
 
-This repository provides the OpenAPI description for the RouteHub REST API.
+This repository provides the OpenAPI description (OAD) for the RouteHub REST API. The documentation, generated from the OAD, can be found [here](https://tandiljuan.github.io/routehub-openapi/).
 
 RouteHub is a service designed to optimize delivery routes based on a given set of deliveries, drivers, vehicle fleet and dispatch locations.
 
