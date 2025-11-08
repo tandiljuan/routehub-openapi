@@ -2,7 +2,7 @@ openapi: 3.1.0
 info:
   title: RouteHub REST API
   description: RouteHub is a user-friendly API designed to serve as a central access point for clients seeking efficient routes planning.
-  version: 0.7.0
+  version: 0.8.0
   license:
     name: GNU Affero General Public License
     url: https://www.gnu.org/licenses/agpl-3.0.html
