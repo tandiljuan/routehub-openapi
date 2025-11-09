@@ -35,6 +35,7 @@ Below is a list of npm scripts (aliases) for frequently used commands. As a quic
 * `bundle-yaml`: Bundles all files belonging to the OpenAPI description into a single YAML file.
 * `bundle-json`: Bundles all files belonging to the OpenAPI description into a single JSON file.
 * `build-man`: Generates documentation from the OpenAPI description.
+* `mock`: Run mock service from the OpenAPI description.
 
 Documentation
 -------------
