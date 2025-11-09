@@ -171,7 +171,9 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/delivery"
+                allOf:
+                  - $ref: "components.yaml#/components/schemas/id_number"
+                  - $ref: "#/components/schemas/delivery"
               examples:
                 $ref: "deliveries_examples.yaml#/unit/200"
         "404":

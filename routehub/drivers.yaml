@@ -159,7 +159,9 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/driver"
+                allOf:
+                  - $ref: "components.yaml#/components/schemas/id_number"
+                  - $ref: "#/components/schemas/driver"
               examples:
                 $ref: "drivers_examples.yaml#/unit/200"
         "404":
