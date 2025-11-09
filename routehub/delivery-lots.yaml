@@ -101,6 +101,8 @@ paths:
             application/json:
               schema:
                 $ref: "components.yaml#/components/schemas/generic"
+              example:
+                $ref: "components.yaml#/examples/generic/403/value"
 
     post:
       operationId: delivery-lots-post
@@ -130,6 +132,8 @@ paths:
             application/json:
               schema:
                 $ref: "components.yaml#/components/schemas/generic"
+              example:
+                $ref: "components.yaml#/examples/generic/403/value"
 
   /lots/{id}:
     parameters:
@@ -157,6 +161,8 @@ paths:
             application/json:
               schema:
                 $ref: "components.yaml#/components/schemas/generic"
+              example:
+                $ref: "components.yaml#/examples/generic/404/value"
 
     patch:
       operationId: delivery-lots-id-put
@@ -186,6 +192,8 @@ paths:
             application/json:
               schema:
                 $ref: "components.yaml#/components/schemas/generic"
+              example:
+                $ref: "components.yaml#/examples/generic/404/value"
 
     delete:
       operationId: delivery-lots-id-delete
@@ -199,12 +207,16 @@ paths:
             application/json:
               schema:
                 $ref: "components.yaml#/components/schemas/generic"
+              example:
+                $ref: "components.yaml#/examples/generic/200/value"
         "404":
           description: The specified delivery lot was not found.
           content:
             application/json:
               schema:
                 $ref: "components.yaml#/components/schemas/generic"
+              example:
+                $ref: "components.yaml#/examples/generic/404/value"
 
   /lots/{id}/plan:
     parameters:
@@ -230,6 +242,8 @@ paths:
             application/json:
               schema:
                 $ref: "components.yaml#/components/schemas/generic"
+              example:
+                $ref: "components.yaml#/examples/generic/404/value"
 
     post:
       operationId: delivery-lots-plan-post
@@ -243,9 +257,13 @@ paths:
             application/json:
               schema:
                 $ref: "components.yaml#/components/schemas/generic"
+              example:
+                $ref: "components.yaml#/examples/generic/200/value"
         "404":
           description: The specified delivery lot was not found.
           content:
             application/json:
               schema:
                 $ref: "components.yaml#/components/schemas/generic"
+              example:
+                $ref: "components.yaml#/examples/generic/404/value"

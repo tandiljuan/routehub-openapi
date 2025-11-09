@@ -61,6 +61,8 @@ paths:
             application/json:
               schema:
                 $ref: "components.yaml#/components/schemas/generic"
+              example:
+                $ref: "components.yaml#/examples/generic/403/value"
 
     post:
       operationId: fleets-post
@@ -90,6 +92,8 @@ paths:
             application/json:
               schema:
                 $ref: "components.yaml#/components/schemas/generic"
+              example:
+                $ref: "components.yaml#/examples/generic/403/value"
 
   /fleets/{id}:
     parameters:
@@ -117,6 +121,8 @@ paths:
             application/json:
               schema:
                 $ref: "components.yaml#/components/schemas/generic"
+              example:
+                $ref: "components.yaml#/examples/generic/404/value"
 
     patch:
       operationId: fleets-id-put
@@ -146,6 +152,8 @@ paths:
             application/json:
               schema:
                 $ref: "components.yaml#/components/schemas/generic"
+              example:
+                $ref: "components.yaml#/examples/generic/404/value"
 
     delete:
       operationId: fleets-id-delete
@@ -159,9 +167,13 @@ paths:
             application/json:
               schema:
                 $ref: "components.yaml#/components/schemas/generic"
+              example:
+                $ref: "components.yaml#/examples/generic/200/value"
         "404":
           description: Fleet not found with the provided ID.
           content:
             application/json:
               schema:
                 $ref: "components.yaml#/components/schemas/generic"
+              example:
+                $ref: "components.yaml#/examples/generic/404/value"
