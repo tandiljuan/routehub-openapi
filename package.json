@@ -16,7 +16,8 @@
     "bundle-json": "redocly bundle -o rhbundle.json routehub.yaml",
     "build-man": "redocly build-docs -o rhmanual.html routehub.yaml",
     "premock": "node -e \"if(!require('fs').existsSync('rhbundle.yaml')){process.exit(1)}\" || npm run bundle-yaml",
-    "mock": "prism mock rhbundle.yaml"
+    "mock": "prism mock rhbundle.yaml",
+    "respect": "redocly respect arazzo/* --input token='1234' --server route_hub_api='http://127.0.0.1:4010'"
   },
   "engines": {
     "node": ">= 20.19"
