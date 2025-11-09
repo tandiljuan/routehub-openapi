@@ -8,8 +8,7 @@
 
 vehicle:
 
-  "1.0": &vehicle1.0
-    id: 1
+  "payload1.0": &payload1.0
     name: "pickup"
     volume: 1230000
     volume_unit: "CUBIC_CENTIMETER"
@@ -17,10 +16,32 @@ vehicle:
     consumption_unit: "LITERS_PER_100KM"
     category_type: "PICKUP"
     engine_type: "DIESEL"
-  "1.1": &vehicle1.1
-    <<: *vehicle1.0
+  "payload1.1": &payload1.1
     name: "pickup-update"
     consumption: 10
+  "1.0": &vehicle1.0
+    <<: *payload1.0
+    id: 1
+  "1.1": &vehicle1.1
+    # @see https://yaml.org/type/merge.html
+    <<: *payload1.1
+    <<: *vehicle1.0
+
+# -----
+# Requests
+# -----
+
+request:
+
+  create:
+    vehicle-1.0:
+      summary: "Vehicle #1"
+      value: *payload1.0
+
+  update:
+    vehicle-1.1:
+      summary: "Vehicle #1 (update)"
+      value: *payload1.1
 
 # -----
 # Lists

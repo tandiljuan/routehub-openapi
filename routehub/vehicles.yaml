@@ -100,6 +100,8 @@ paths:
           application/json:
             schema:
               $ref: "#/components/schemas/vehicle"
+            examples:
+              $ref: "vehicles_examples.yaml#/request/create"
       responses:
         "200":
           description: Vehicle successfully added.
@@ -160,6 +162,8 @@ paths:
           application/json:
             schema:
               $ref: "#/components/schemas/vehicle"
+            examples:
+              $ref: "vehicles_examples.yaml#/request/update"
       responses:
         "200":
           description: Vehicle information successfully updated.
