@@ -134,7 +134,9 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/milestone"
+                allOf:
+                  - $ref: "components.yaml#/components/schemas/id_number"
+                  - $ref: "#/components/schemas/milestone"
               examples:
                 $ref: "milestones_examples.yaml#/unit/200"
         "404":

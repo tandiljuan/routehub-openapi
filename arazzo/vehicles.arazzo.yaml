@@ -1,0 +1,131 @@
+arazzo: 1.0.1
+info:
+  title: Vehicles Endpoints
+  summary: Test the vehicles endpoints of the API
+  description: ...
+  version: 1.0.0
+sourceDescriptions:
+  - name: route_hub_api
+    type: openapi
+    url: ../routehub.yaml
+workflows:
+  - workflowId: vehiclesCRUD
+    summary: Create a Vehicle
+    description: |
+      Workflow to create a new vehicle.
+    inputs:
+      type: object
+      properties:
+        token:
+          type: string
+          format: password
+          description: OAuth2 Bearer Token
+    parameters:
+      - name: Authorization
+        in: header
+        value: "Bearer {$inputs.token}"
+    steps:
+
+      - stepId: vehiclesGetList0
+        operationId: route_hub_api.vehicles-get
+        description: |
+          Get the list of vehicles.
+        parameters:
+          - name: Prefer
+            in: header
+            value: "example=empty"
+        successCriteria:
+          - condition: "$statusCode == 200"
+
+      - stepId: vehiclesCreate0
+        operationId: route_hub_api.vehicles-post
+        description: |
+          Send (POST) the vehicle to create.
+        parameters:
+          - name: Prefer
+            in: header
+            value: "example=vehicle-1.0"
+        successCriteria:
+          - condition: "$statusCode == 200"
+        outputs:
+          vehicle_id: $response.body#/id
+
+      - stepId: vehiclesGetVehicle0
+        operationId: route_hub_api.vehicles-id-get
+        description: |
+          Get vehicle by ID.
+        parameters:
+          - name: id
+            in: path
+            value: $steps.vehiclesCreate0.outputs.vehicle_id
+          - name: Prefer
+            in: header
+            value: "example=vehicle-1.0"
+        successCriteria:
+          - condition: "$statusCode == 200"
+
+      - stepId: vehiclesGetList1
+        operationId: route_hub_api.vehicles-get
+        description: |
+          Get the list of vehicles.
+        parameters:
+          - name: Prefer
+            in: header
+            value: "example=list-1.0"
+        successCriteria:
+          - condition: "$statusCode == 200"
+          #--------------------------------
+          # Following condition not working
+          # https://jsonpath.com/
+          # https://spec.openapis.org/arazzo/latest.html#fixed-fields-9
+          #--------------------------------
+          #- context: "$response.body"
+          #  condition: "$[?count(@) > 0]"
+          #  type: "jsonpath"
+
+      - stepId: vehiclesUpdateVehicle0
+        operationId: route_hub_api.vehicles-id-put
+        description: |
+          Update a vehicle by ID
+        parameters:
+          - name: id
+            in: path
+            value: $steps.vehiclesCreate0.outputs.vehicle_id
+          - name: Prefer
+            in: header
+            value: "example=vehicle-1.1"
+        successCriteria:
+          - condition: "$statusCode == 200"
+
+      - stepId: vehiclesGetList2
+        operationId: route_hub_api.vehicles-get
+        description: |
+          Get the list of vehicles.
+        parameters:
+          - name: Prefer
+            in: header
+            value: "example=list-1.1"
+        successCriteria:
+          - condition: "$statusCode == 200"
+
+      - stepId: vehiclesDeleteVehicle0
+        operationId: route_hub_api.vehicles-id-delete
+        description: |
+          Delete a vehicle by ID
+        parameters:
+          - name: id
+            in: path
+            value: $steps.vehiclesCreate0.outputs.vehicle_id
+        successCriteria:
+          - condition: "$statusCode == 200"
+
+      - stepId: vehiclesGetList3
+        operationId: route_hub_api.vehicles-get
+        description: |
+          Get the list of vehicles.
+        parameters:
+          - name: Prefer
+            in: header
+            value: "example=empty"
+        successCriteria:
+          - condition: "$statusCode == 200"

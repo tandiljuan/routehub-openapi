@@ -160,7 +160,9 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/vehicle"
+                allOf:
+                  - $ref: "components.yaml#/components/schemas/id_number"
+                  - $ref: "#/components/schemas/vehicle"
               examples:
                 $ref: "vehicles_examples.yaml#/unit/200"
         "404":

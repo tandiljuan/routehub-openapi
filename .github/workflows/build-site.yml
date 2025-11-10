@@ -67,7 +67,7 @@ jobs:
         uses: docker://node:20.19-alpine
         with:
           entrypoint: /usr/local/bin/npm
-          args: install
+          args: install --omit optional
 
       - name: Build bundle (YAML)
         uses: docker://node:20.19-alpine
