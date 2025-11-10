@@ -36,6 +36,16 @@ Below is a list of npm scripts (aliases) for frequently used commands. As a quic
 * `bundle-json`: Bundles all files belonging to the OpenAPI description into a single JSON file.
 * `build-man`: Generates documentation from the OpenAPI description.
 * `mock`: Run mock service from the OpenAPI description.
+* `respect`: Validates an OpenAPI implementation against the Arazzo description files located in the `arazzo` directory. This command assumes the API service is running on port `4010`, the same port used by the mock server.
+
+Arazzo
+------
+
+The [Arazzo Specification](https://spec.openapis.org/arazzo/latest.html) allows you to describe API workflows in both a human-readable and machine-readable format. This enhances API specifications by providing a narrative that improves the developer experience for those consuming the API.
+
+As of this writing, the current version of the specification is **`1.0.1`**. You can find an Arazzo description in the `arazzo` directory, created to learn how the specification works in practice.
+
+Arazzo is a promising young project. While it currently lacks some features found in tools like [Hurl](https://github.com/Orange-OpenSource/hurl) or [httpyac](https://github.com/anweber/httpyac), we'll continue to monitor its development as we continue to develop contract tests using other tool(s).
 
 Documentation
 -------------
