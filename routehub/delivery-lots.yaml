@@ -115,6 +115,8 @@ paths:
           application/json:
             schema:
               $ref: "#/components/schemas/delivery_lot"
+            examples:
+              $ref: "delivery-lots_examples.yaml#/request/create"
       responses:
         "200":
           description: The newly created delivery lot.
@@ -175,6 +177,8 @@ paths:
           application/json:
             schema:
               $ref: "#/components/schemas/delivery_lot"
+            examples:
+              $ref: "delivery-lots_examples.yaml#/request/update"
       responses:
         "200":
           description: The updated delivery lot.
