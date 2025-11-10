@@ -60,6 +60,8 @@ paths:
             application/json:
               schema:
                 $ref: "components.yaml#/components/schemas/generic"
+              example:
+                $ref: "components.yaml#/examples/generic/403/value"
 
     post:
       operationId: milestones-post
@@ -72,6 +74,8 @@ paths:
           application/json:
             schema:
               $ref: "#/components/schemas/milestone"
+            examples:
+              $ref: "milestones_examples.yaml#/request/create"
       responses:
         "200":
           description: Successfully created milestone with its assigned ID.
@@ -89,6 +93,8 @@ paths:
             application/json:
               schema:
                 $ref: "components.yaml#/components/schemas/generic"
+              example:
+                $ref: "components.yaml#/examples/generic/403/value"
 
   /milestones/{id}:
     parameters:
@@ -116,6 +122,8 @@ paths:
             application/json:
               schema:
                 $ref: "components.yaml#/components/schemas/generic"
+              example:
+                $ref: "components.yaml#/examples/generic/404/value"
 
     patch:
       operationId: milestones-id-put
@@ -128,6 +136,8 @@ paths:
           application/json:
             schema:
               $ref: "#/components/schemas/milestone"
+            examples:
+              $ref: "milestones_examples.yaml#/request/update"
       responses:
         "200":
           description: Successfully updated milestone.
@@ -145,6 +155,8 @@ paths:
             application/json:
               schema:
                 $ref: "components.yaml#/components/schemas/generic"
+              example:
+                $ref: "components.yaml#/examples/generic/404/value"
 
     delete:
       operationId: milestones-id-delete
@@ -158,9 +170,13 @@ paths:
             application/json:
               schema:
                 $ref: "components.yaml#/components/schemas/generic"
+              example:
+                $ref: "components.yaml#/examples/generic/200/value"
         "404":
           description: Milestone not found.
           content:
             application/json:
               schema:
                 $ref: "components.yaml#/components/schemas/generic"
+              example:
+                $ref: "components.yaml#/examples/generic/404/value"

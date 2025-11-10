@@ -86,6 +86,8 @@ paths:
             application/json:
               schema:
                 $ref: "components.yaml#/components/schemas/generic"
+              example:
+                $ref: "components.yaml#/examples/generic/403/value"
 
     post:
       operationId: vehicles-post
@@ -98,6 +100,8 @@ paths:
           application/json:
             schema:
               $ref: "#/components/schemas/vehicle"
+            examples:
+              $ref: "vehicles_examples.yaml#/request/create"
       responses:
         "200":
           description: Vehicle successfully added.
@@ -115,6 +119,8 @@ paths:
             application/json:
               schema:
                 $ref: "components.yaml#/components/schemas/generic"
+              example:
+                $ref: "components.yaml#/examples/generic/403/value"
 
   /vehicles/{id}:
     parameters:
@@ -142,6 +148,8 @@ paths:
             application/json:
               schema:
                 $ref: "components.yaml#/components/schemas/generic"
+              example:
+                $ref: "components.yaml#/examples/generic/404/value"
 
     patch:
       operationId: vehicles-id-put
@@ -154,6 +162,8 @@ paths:
           application/json:
             schema:
               $ref: "#/components/schemas/vehicle"
+            examples:
+              $ref: "vehicles_examples.yaml#/request/update"
       responses:
         "200":
           description: Vehicle information successfully updated.
@@ -171,6 +181,8 @@ paths:
             application/json:
               schema:
                 $ref: "components.yaml#/components/schemas/generic"
+              example:
+                $ref: "components.yaml#/examples/generic/404/value"
 
     delete:
       operationId: vehicles-id-delete
@@ -184,9 +196,13 @@ paths:
             application/json:
               schema:
                 $ref: "components.yaml#/components/schemas/generic"
+              example:
+                $ref: "components.yaml#/examples/generic/200/value"
         "404":
           description: Vehicle not found with the provided ID.
           content:
             application/json:
               schema:
                 $ref: "components.yaml#/components/schemas/generic"
+              example:
+                $ref: "components.yaml#/examples/generic/404/value"

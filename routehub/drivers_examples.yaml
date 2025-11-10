@@ -8,8 +8,7 @@
 
 driver:
 
-  "1.0": &driver1.0
-    id: 1
+  "payload1.0": &payload1.0
     first_name: "John"
     last_name: "Doe"
     work_schedules:
@@ -23,10 +22,32 @@ driver:
     vehicles:
       - vehicle_id: 1
         quantity: 2
-  "1.1": &driver1.1
-    <<: *driver1.0
+  "payload1.1": &payload1.1
     first_name: "Jane"
     last_name: "Smith"
+  "1.0": &driver1.0
+    <<: *payload1.0
+    id: 1
+  "1.1": &driver1.1
+    # @see https://yaml.org/type/merge.html
+    <<: *payload1.1
+    <<: *driver1.0
+
+# -----
+# Requests
+# -----
+
+request:
+
+  create:
+    driver-1.0:
+      summary: "Driver #1"
+      value: *payload1.0
+
+  update:
+    driver-1.1:
+      summary: "Driver #1 (update)"
+      value: *payload1.1
 
 # -----
 # Lists

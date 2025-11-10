@@ -8,18 +8,39 @@
 
 fleet:
 
-  "1.0": &fleet1.0
-    id: 1
+  "payload1.0": &payload1.0
     name: "my-fleet"
     vehicles:
       - vehicle_id: 1
         quantity: 2
-  "1.1": &fleet1.1
-    <<: *fleet1.0
+  "payload1.1": &payload1.1
     name: "my-fleet-update"
     vehicles:
       - vehicle_id: 2
         quantity: 3
+  "1.0": &fleet1.0
+    <<: *payload1.0
+    id: 1
+  "1.1": &fleet1.1
+    # @see https://yaml.org/type/merge.html
+    <<: *payload1.1
+    <<: *fleet1.0
+
+# -----
+# Requests
+# -----
+
+request:
+
+  create:
+    fleet-1.0:
+      summary: "Fleet #1"
+      value: *payload1.0
+
+  update:
+    fleet-1.1:
+      summary: "Fleet #1 (update)"
+      value: *payload1.1
 
 # -----
 # Lists

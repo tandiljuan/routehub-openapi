@@ -8,8 +8,7 @@
 
 delivery-lot:
 
-  "1.0": &delivery-lot1.0
-    id: 1
+  "payload1.0": &payload1.0
     milestone_id: 1
     deliveries:
       - 1
@@ -17,11 +16,17 @@ delivery-lot:
     drivers:
       - 1
     state: "UNPROCESSED"
-  "1.1": &delivery-lot1.1
-    <<: *delivery-lot1.0
+  "payload1.1": &payload1.1
     deliveries:
       - 1
       - 2
+  "1.0": &delivery-lot1.0
+    <<: *payload1.0
+    id: 1
+  "1.1": &delivery-lot1.1
+    # @see https://yaml.org/type/merge.html
+    <<: *payload1.1
+    <<: *delivery-lot1.0
 
 
 delivery-plan:
@@ -35,6 +40,22 @@ delivery-plan:
         delivery_units:
           - 1
           - 2
+
+# --------
+# Requests
+# --------
+
+request:
+
+  create:
+    delivery-lot-1.0:
+      summary: "Delivery Lot #1"
+      value: *payload1.0
+
+  update:
+    delivery-lot-1.1:
+      summary: "Delivery Lot #1 (update)"
+      value: *payload1.1
 
 # -----
 # Lists

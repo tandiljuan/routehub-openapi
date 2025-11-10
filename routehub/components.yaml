@@ -41,3 +41,35 @@ components:
       required: true
       schema:
         type: integer
+
+
+# =================
+# Reusable Examples
+# =================
+
+examples:
+
+
+  # ---------------------------------
+  # Examples for the 'generic' schema
+  # ---------------------------------
+
+  generic:
+
+    "200":
+      summary: "A generic 200 response"
+      value:
+        code: 200
+        message: "OK"
+
+    "403":
+      summary: "A generic 403 response"
+      value:
+        code: 403
+        message: "Access Forbidden"
+
+    "404":
+      summary: "A generic 404 response"
+      value:
+        code: 404
+        message: "Not Found"

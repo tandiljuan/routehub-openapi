@@ -85,6 +85,8 @@ paths:
             application/json:
               schema:
                 $ref: "components.yaml#/components/schemas/generic"
+              example:
+                $ref: "components.yaml#/examples/generic/403/value"
 
     post:
       operationId: drivers-post
@@ -97,6 +99,8 @@ paths:
           application/json:
             schema:
               $ref: "#/components/schemas/driver"
+            examples:
+              $ref: "drivers_examples.yaml#/request/create"
       responses:
         "200":
           description: The newly created driver.
@@ -114,6 +118,8 @@ paths:
             application/json:
               schema:
                 $ref: "components.yaml#/components/schemas/generic"
+              example:
+                $ref: "components.yaml#/examples/generic/403/value"
 
   /drivers/{id}:
     parameters:
@@ -141,6 +147,8 @@ paths:
             application/json:
               schema:
                 $ref: "components.yaml#/components/schemas/generic"
+              example:
+                $ref: "components.yaml#/examples/generic/404/value"
 
     patch:
       operationId: drivers-id-put
@@ -153,6 +161,8 @@ paths:
           application/json:
             schema:
               $ref: "#/components/schemas/driver"
+            examples:
+              $ref: "drivers_examples.yaml#/request/update"
       responses:
         "200":
           description: The updated driver.
@@ -170,6 +180,8 @@ paths:
             application/json:
               schema:
                 $ref: "components.yaml#/components/schemas/generic"
+              example:
+                $ref: "components.yaml#/examples/generic/404/value"
 
     delete:
       operationId: drivers-id-delete
@@ -183,9 +195,13 @@ paths:
             application/json:
               schema:
                 $ref: "components.yaml#/components/schemas/generic"
+              example:
+                $ref: "components.yaml#/examples/generic/200/value"
         "404":
           description: Driver not found.
           content:
             application/json:
               schema:
                 $ref: "components.yaml#/components/schemas/generic"
+              example:
+                $ref: "components.yaml#/examples/generic/404/value"

@@ -97,6 +97,8 @@ paths:
             application/json:
               schema:
                 $ref: "components.yaml#/components/schemas/generic"
+              example:
+                $ref: "components.yaml#/examples/generic/403/value"
 
     post:
       operationId: deliveries-post
@@ -109,6 +111,8 @@ paths:
           application/json:
             schema:
               $ref: "#/components/schemas/delivery"
+            examples:
+              $ref: "deliveries_examples.yaml#/request/create"
       responses:
         "200":
           description: The newly created delivery.
@@ -126,6 +130,8 @@ paths:
             application/json:
               schema:
                 $ref: "components.yaml#/components/schemas/generic"
+              example:
+                $ref: "components.yaml#/examples/generic/403/value"
 
   /deliveries/{id}:
     parameters:
@@ -153,6 +159,8 @@ paths:
             application/json:
               schema:
                 $ref: "components.yaml#/components/schemas/generic"
+              example:
+                $ref: "components.yaml#/examples/generic/404/value"
 
     patch:
       operationId: deliveries-id-put
@@ -165,6 +173,8 @@ paths:
           application/json:
             schema:
               $ref: "#/components/schemas/delivery"
+            examples:
+              $ref: "deliveries_examples.yaml#/request/update"
       responses:
         "200":
           description: The updated delivery.
@@ -182,6 +192,8 @@ paths:
             application/json:
               schema:
                 $ref: "components.yaml#/components/schemas/generic"
+              example:
+                $ref: "components.yaml#/examples/generic/404/value"
 
     delete:
       operationId: deliveries-id-delete
@@ -195,9 +207,13 @@ paths:
             application/json:
               schema:
                 $ref: "components.yaml#/components/schemas/generic"
+              example:
+                $ref: "components.yaml#/examples/generic/200/value"
         "404":
           description: The specified delivery ID was not found.
           content:
             application/json:
               schema:
                 $ref: "components.yaml#/components/schemas/generic"
+              example:
+                $ref: "components.yaml#/examples/generic/404/value"
