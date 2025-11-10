@@ -99,6 +99,8 @@ paths:
           application/json:
             schema:
               $ref: "#/components/schemas/driver"
+            examples:
+              $ref: "drivers_examples.yaml#/request/create"
       responses:
         "200":
           description: The newly created driver.
@@ -159,6 +161,8 @@ paths:
           application/json:
             schema:
               $ref: "#/components/schemas/driver"
+            examples:
+              $ref: "drivers_examples.yaml#/request/update"
       responses:
         "200":
           description: The updated driver.
