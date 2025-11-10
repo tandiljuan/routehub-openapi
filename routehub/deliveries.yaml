@@ -111,6 +111,8 @@ paths:
           application/json:
             schema:
               $ref: "#/components/schemas/delivery"
+            examples:
+              $ref: "deliveries_examples.yaml#/request/create"
       responses:
         "200":
           description: The newly created delivery.
@@ -171,6 +173,8 @@ paths:
           application/json:
             schema:
               $ref: "#/components/schemas/delivery"
+            examples:
+              $ref: "deliveries_examples.yaml#/request/update"
       responses:
         "200":
           description: The updated delivery.

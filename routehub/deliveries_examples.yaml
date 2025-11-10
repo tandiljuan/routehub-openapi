@@ -8,8 +8,7 @@
 
 delivery:
 
-  "1.0": &delivery1.0
-    id: 1
+  "payload1.0": &payload1.0
     delivery_method: "DELIVERY"
     milestone_id: 1
     destination: "37.7749,-122.4194"
@@ -22,13 +21,35 @@ delivery:
     volume_unit: "CUBIC_CENTIMETER"
     weight: 1000
     weight_unit: "GRAMS"
-  "1.1": &delivery1.1
-    <<: *delivery1.0
+  "payload1.1": &payload1.1
     width: 15
     height: 25
     depth: 35
     volume: 6500
     weight: 1500
+  "1.0": &delivery1.0
+    <<: *payload1.0
+    id: 1
+  "1.1": &delivery1.1
+    # @see https://yaml.org/type/merge.html
+    <<: *payload1.1
+    <<: *delivery1.0
+
+# --------
+# Requests
+# --------
+
+request:
+
+  create:
+    delivery-1.0:
+      summary: "Delivery #1"
+      value: *payload1.0
+
+  update:
+    delivery-1.1:
+      summary: "Delivery #1 (update)"
+      value: *payload1.1
 
 # -----
 # Lists
