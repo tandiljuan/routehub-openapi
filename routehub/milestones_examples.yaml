@@ -8,15 +8,36 @@
 
 milestone:
 
-  "1.0": &milestone1.0
-    id: 1
+  "payload1.0": &payload1.0
     name: "Main Depot"
     location: "37.7749,-122.4194"
     milestone_category: "DEPOT"
-  "1.1": &milestone1.1
-    <<: *milestone1.0
+  "payload1.1": &payload1.1
     name: "Main Distribution Point"
     milestone_category: "DISTRIBUTION_CENTER"
+  "1.0": &milestone1.0
+    <<: *payload1.0
+    id: 1
+  "1.1": &milestone1.1
+    # @see https://yaml.org/type/merge.html
+    <<: *payload1.1
+    <<: *milestone1.0
+
+# --------
+# Requests
+# --------
+
+request:
+
+  create:
+    milestone-1.0:
+      summary: "Milestone #1"
+      value: *payload1.0
+
+  update:
+    milestone-1.1:
+      summary: "Milestone #1 (update)"
+      value: *payload1.1
 
 # -----
 # Lists

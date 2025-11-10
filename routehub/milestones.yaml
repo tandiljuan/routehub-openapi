@@ -74,6 +74,8 @@ paths:
           application/json:
             schema:
               $ref: "#/components/schemas/milestone"
+            examples:
+              $ref: "milestones_examples.yaml#/request/create"
       responses:
         "200":
           description: Successfully created milestone with its assigned ID.
@@ -134,6 +136,8 @@ paths:
           application/json:
             schema:
               $ref: "#/components/schemas/milestone"
+            examples:
+              $ref: "milestones_examples.yaml#/request/update"
       responses:
         "200":
           description: Successfully updated milestone.
