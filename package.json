@@ -9,7 +9,8 @@
   },
   "optionalDependencies": {
     "@stoplight/prism-cli": "^5.14.2",
-    "concurrently": "^9.2.1"
+    "concurrently": "^9.2.1",
+    "http-server": "^14.1.1"
   },
   "scripts": {
     "lint": "redocly lint routehub.yaml",
