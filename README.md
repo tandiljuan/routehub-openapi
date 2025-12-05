@@ -35,6 +35,7 @@ Below is a list of npm scripts (aliases) for frequently used commands. As a quic
 * `bundle-yaml`: Bundles all files belonging to the OpenAPI description into a single YAML file.
 * `bundle-json`: Bundles all files belonging to the OpenAPI description into a single JSON file.
 * `build-man`: Generates documentation from the OpenAPI description.
+* `watch-man`: Automatically generates documentation on every YAML file change.
 * `mock`: Run mock service from the OpenAPI description.
 * `respect`: Validates an OpenAPI implementation against the Arazzo description files located in the `arazzo` directory. This command assumes the API service is running on port `4010`, the same port used by the mock server.
 
