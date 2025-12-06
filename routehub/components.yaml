@@ -60,6 +60,17 @@ components:
           example:
             $ref: "#/examples/generic/401/value"
 
+    notfound:
+      description: Requested resource not found on the server.
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/generic"
+            required:
+              - code
+          example:
+            $ref: "#/examples/generic/404/value"
+
 
 # =================
 # Reusable Examples
