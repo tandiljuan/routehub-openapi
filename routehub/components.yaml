@@ -43,6 +43,24 @@ components:
         type: integer
 
 
+  # ---------
+  # Responses
+  # ---------
+
+  responses:
+
+    unauthorized:
+      description: Invalid or missing access token.
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/generic"
+            required:
+              - code
+          example:
+            $ref: "#/examples/generic/401/value"
+
+
 # =================
 # Reusable Examples
 # =================
@@ -61,6 +79,12 @@ examples:
       value:
         code: 200
         message: "OK"
+
+    "401":
+      summary: "A generic 401 response"
+      value:
+        code: 401
+        message: "Unauthorized"
 
     "403":
       summary: "A generic 403 response"
