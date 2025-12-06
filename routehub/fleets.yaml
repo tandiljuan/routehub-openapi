@@ -106,13 +106,7 @@ paths:
               examples:
                 $ref: "fleets_examples.yaml#/unit/200"
         "404":
-          description: Fleet not found with the provided ID.
-          content:
-            application/json:
-              schema:
-                $ref: "components.yaml#/components/schemas/generic"
-              example:
-                $ref: "components.yaml#/examples/generic/404/value"
+          $ref: "components.yaml#/components/responses/notfound"
         "401":
           $ref: "components.yaml#/components/responses/unauthorized"
 
@@ -141,13 +135,7 @@ paths:
               examples:
                 $ref: "fleets_examples.yaml#/unit/200"
         "404":
-          description: Fleet not found with the provided ID.
-          content:
-            application/json:
-              schema:
-                $ref: "components.yaml#/components/schemas/generic"
-              example:
-                $ref: "components.yaml#/examples/generic/404/value"
+          $ref: "components.yaml#/components/responses/notfound"
         "401":
           $ref: "components.yaml#/components/responses/unauthorized"
 
@@ -166,12 +154,6 @@ paths:
               example:
                 $ref: "components.yaml#/examples/generic/200/value"
         "404":
-          description: Fleet not found with the provided ID.
-          content:
-            application/json:
-              schema:
-                $ref: "components.yaml#/components/schemas/generic"
-              example:
-                $ref: "components.yaml#/examples/generic/404/value"
+          $ref: "components.yaml#/components/responses/notfound"
         "401":
           $ref: "components.yaml#/components/responses/unauthorized"
