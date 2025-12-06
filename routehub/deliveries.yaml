@@ -142,13 +142,7 @@ paths:
               examples:
                 $ref: "deliveries_examples.yaml#/unit/200"
         "404":
-          description: The specified delivery ID was not found.
-          content:
-            application/json:
-              schema:
-                $ref: "components.yaml#/components/schemas/generic"
-              example:
-                $ref: "components.yaml#/examples/generic/404/value"
+          $ref: "components.yaml#/components/responses/notfound"
         "401":
           $ref: "components.yaml#/components/responses/unauthorized"
 
@@ -177,13 +171,7 @@ paths:
               examples:
                 $ref: "deliveries_examples.yaml#/unit/200"
         "404":
-          description: The specified delivery ID was not found.
-          content:
-            application/json:
-              schema:
-                $ref: "components.yaml#/components/schemas/generic"
-              example:
-                $ref: "components.yaml#/examples/generic/404/value"
+          $ref: "components.yaml#/components/responses/notfound"
         "401":
           $ref: "components.yaml#/components/responses/unauthorized"
 
@@ -202,12 +190,6 @@ paths:
               example:
                 $ref: "components.yaml#/examples/generic/200/value"
         "404":
-          description: The specified delivery ID was not found.
-          content:
-            application/json:
-              schema:
-                $ref: "components.yaml#/components/schemas/generic"
-              example:
-                $ref: "components.yaml#/examples/generic/404/value"
+          $ref: "components.yaml#/components/responses/notfound"
         "401":
           $ref: "components.yaml#/components/responses/unauthorized"
