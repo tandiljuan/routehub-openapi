@@ -54,14 +54,8 @@ paths:
                     - $ref: "#/components/schemas/milestone"
               examples:
                 $ref: "milestones_examples.yaml#/list/200"
-        "403":
-          description: Access to the requested resource is forbidden.
-          content:
-            application/json:
-              schema:
-                $ref: "components.yaml#/components/schemas/generic"
-              example:
-                $ref: "components.yaml#/examples/generic/403/value"
+        "401":
+          $ref: "components.yaml#/components/responses/unauthorized"
 
     post:
       operationId: milestones-post
@@ -87,14 +81,8 @@ paths:
                   - $ref: "#/components/schemas/milestone"
               examples:
                 $ref: "milestones_examples.yaml#/unit/200"
-        "403":
-          description: Access to the requested resource is forbidden.
-          content:
-            application/json:
-              schema:
-                $ref: "components.yaml#/components/schemas/generic"
-              example:
-                $ref: "components.yaml#/examples/generic/403/value"
+        "401":
+          $ref: "components.yaml#/components/responses/unauthorized"
 
   /milestones/{id}:
     parameters:
@@ -124,6 +112,8 @@ paths:
                 $ref: "components.yaml#/components/schemas/generic"
               example:
                 $ref: "components.yaml#/examples/generic/404/value"
+        "401":
+          $ref: "components.yaml#/components/responses/unauthorized"
 
     patch:
       operationId: milestones-id-put
@@ -157,6 +147,8 @@ paths:
                 $ref: "components.yaml#/components/schemas/generic"
               example:
                 $ref: "components.yaml#/examples/generic/404/value"
+        "401":
+          $ref: "components.yaml#/components/responses/unauthorized"
 
     delete:
       operationId: milestones-id-delete
@@ -180,3 +172,5 @@ paths:
                 $ref: "components.yaml#/components/schemas/generic"
               example:
                 $ref: "components.yaml#/examples/generic/404/value"
+        "401":
+          $ref: "components.yaml#/components/responses/unauthorized"
