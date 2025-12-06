@@ -55,14 +55,8 @@ paths:
                     - $ref: "#/components/schemas/fleet"
               examples:
                 $ref: "fleets_examples.yaml#/list/200"
-        "403":
-          description: Access to the requested resource is forbidden.
-          content:
-            application/json:
-              schema:
-                $ref: "components.yaml#/components/schemas/generic"
-              example:
-                $ref: "components.yaml#/examples/generic/403/value"
+        "401":
+          $ref: "components.yaml#/components/responses/unauthorized"
 
     post:
       operationId: fleets-post
@@ -88,14 +82,8 @@ paths:
                   - $ref: "#/components/schemas/fleet"
               examples:
                 $ref: "fleets_examples.yaml#/unit/200"
-        "403":
-          description: Access to the requested resource is forbidden.
-          content:
-            application/json:
-              schema:
-                $ref: "components.yaml#/components/schemas/generic"
-              example:
-                $ref: "components.yaml#/examples/generic/403/value"
+        "401":
+          $ref: "components.yaml#/components/responses/unauthorized"
 
   /fleets/{id}:
     parameters:
@@ -125,6 +113,8 @@ paths:
                 $ref: "components.yaml#/components/schemas/generic"
               example:
                 $ref: "components.yaml#/examples/generic/404/value"
+        "401":
+          $ref: "components.yaml#/components/responses/unauthorized"
 
     patch:
       operationId: fleets-id-put
@@ -158,6 +148,8 @@ paths:
                 $ref: "components.yaml#/components/schemas/generic"
               example:
                 $ref: "components.yaml#/examples/generic/404/value"
+        "401":
+          $ref: "components.yaml#/components/responses/unauthorized"
 
     delete:
       operationId: fleets-id-delete
@@ -181,3 +173,5 @@ paths:
                 $ref: "components.yaml#/components/schemas/generic"
               example:
                 $ref: "components.yaml#/examples/generic/404/value"
+        "401":
+          $ref: "components.yaml#/components/responses/unauthorized"

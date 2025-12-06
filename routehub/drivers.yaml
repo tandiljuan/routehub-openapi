@@ -79,14 +79,8 @@ paths:
                     - $ref: "#/components/schemas/driver"
               examples:
                 $ref: "drivers_examples.yaml#/list/200"
-        "403":
-          description: Access to the requested resource is forbidden.
-          content:
-            application/json:
-              schema:
-                $ref: "components.yaml#/components/schemas/generic"
-              example:
-                $ref: "components.yaml#/examples/generic/403/value"
+        "401":
+          $ref: "components.yaml#/components/responses/unauthorized"
 
     post:
       operationId: drivers-post
@@ -112,14 +106,8 @@ paths:
                   - $ref: "#/components/schemas/driver"
               examples:
                 $ref: "drivers_examples.yaml#/unit/200"
-        "403":
-          description: Access to the requested resource is forbidden.
-          content:
-            application/json:
-              schema:
-                $ref: "components.yaml#/components/schemas/generic"
-              example:
-                $ref: "components.yaml#/examples/generic/403/value"
+        "401":
+          $ref: "components.yaml#/components/responses/unauthorized"
 
   /drivers/{id}:
     parameters:
@@ -149,6 +137,8 @@ paths:
                 $ref: "components.yaml#/components/schemas/generic"
               example:
                 $ref: "components.yaml#/examples/generic/404/value"
+        "401":
+          $ref: "components.yaml#/components/responses/unauthorized"
 
     patch:
       operationId: drivers-id-put
@@ -182,6 +172,8 @@ paths:
                 $ref: "components.yaml#/components/schemas/generic"
               example:
                 $ref: "components.yaml#/examples/generic/404/value"
+        "401":
+          $ref: "components.yaml#/components/responses/unauthorized"
 
     delete:
       operationId: drivers-id-delete
@@ -205,3 +197,5 @@ paths:
                 $ref: "components.yaml#/components/schemas/generic"
               example:
                 $ref: "components.yaml#/examples/generic/404/value"
+        "401":
+          $ref: "components.yaml#/components/responses/unauthorized"

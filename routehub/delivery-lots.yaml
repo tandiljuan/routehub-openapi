@@ -95,14 +95,8 @@ paths:
                     - $ref: "#/components/schemas/delivery_lot"
               examples:
                 $ref: "delivery-lots_examples.yaml#/list/200"
-        "403":
-          description: Access to the requested resource is forbidden.
-          content:
-            application/json:
-              schema:
-                $ref: "components.yaml#/components/schemas/generic"
-              example:
-                $ref: "components.yaml#/examples/generic/403/value"
+        "401":
+          $ref: "components.yaml#/components/responses/unauthorized"
 
     post:
       operationId: delivery-lots-post
@@ -128,14 +122,8 @@ paths:
                   - $ref: "#/components/schemas/delivery_lot"
               examples:
                 $ref: "delivery-lots_examples.yaml#/lot/200"
-        "403":
-          description: Access to the requested resource is forbidden.
-          content:
-            application/json:
-              schema:
-                $ref: "components.yaml#/components/schemas/generic"
-              example:
-                $ref: "components.yaml#/examples/generic/403/value"
+        "401":
+          $ref: "components.yaml#/components/responses/unauthorized"
 
   /lots/{id}:
     parameters:
@@ -165,6 +153,8 @@ paths:
                 $ref: "components.yaml#/components/schemas/generic"
               example:
                 $ref: "components.yaml#/examples/generic/404/value"
+        "401":
+          $ref: "components.yaml#/components/responses/unauthorized"
 
     patch:
       operationId: delivery-lots-id-put
@@ -198,6 +188,8 @@ paths:
                 $ref: "components.yaml#/components/schemas/generic"
               example:
                 $ref: "components.yaml#/examples/generic/404/value"
+        "401":
+          $ref: "components.yaml#/components/responses/unauthorized"
 
     delete:
       operationId: delivery-lots-id-delete
@@ -221,6 +213,8 @@ paths:
                 $ref: "components.yaml#/components/schemas/generic"
               example:
                 $ref: "components.yaml#/examples/generic/404/value"
+        "401":
+          $ref: "components.yaml#/components/responses/unauthorized"
 
   /lots/{id}/plan:
     parameters:
@@ -248,6 +242,8 @@ paths:
                 $ref: "components.yaml#/components/schemas/generic"
               example:
                 $ref: "components.yaml#/examples/generic/404/value"
+        "401":
+          $ref: "components.yaml#/components/responses/unauthorized"
 
     post:
       operationId: delivery-lots-plan-post
@@ -271,3 +267,5 @@ paths:
                 $ref: "components.yaml#/components/schemas/generic"
               example:
                 $ref: "components.yaml#/examples/generic/404/value"
+        "401":
+          $ref: "components.yaml#/components/responses/unauthorized"
