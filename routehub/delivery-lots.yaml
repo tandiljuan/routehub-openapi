@@ -189,13 +189,8 @@ paths:
       description: Deletes the delivery lot with the provided ID.
       responses:
         "200":
-          description: Successfully deleted the delivery lot.
-          content:
-            application/json:
-              schema:
-                $ref: "components.yaml#/components/schemas/generic"
-              example:
-                $ref: "components.yaml#/examples/generic/200/value"
+          description: Delivery lot successfully deleted.
+          $ref: "components.yaml#/components/responses/ok"
         "404":
           $ref: "components.yaml#/components/responses/notfound"
         "401":
@@ -231,13 +226,8 @@ paths:
       description: Generates or updates the delivery plan based on the delivery lot details.
       responses:
         "202":
-          description: Successfully created/updated the delivery plan.
-          content:
-            application/json:
-              schema:
-                $ref: "components.yaml#/components/schemas/generic"
-              example:
-                $ref: "components.yaml#/examples/generic/200/value"
+          description: Delivery plan successfully created/updated.
+          $ref: "components.yaml#/components/responses/ok"
         "404":
           $ref: "components.yaml#/components/responses/notfound"
         "401":
