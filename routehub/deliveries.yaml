@@ -185,13 +185,8 @@ paths:
       description: Deletes a specific delivery entity identified by its ID.
       responses:
         "200":
-          description: Indicates successful deletion.
-          content:
-            application/json:
-              schema:
-                $ref: "components.yaml#/components/schemas/generic"
-              example:
-                $ref: "components.yaml#/examples/generic/200/value"
+          description: Delivery successfully deleted.
+          $ref: "components.yaml#/components/responses/ok"
         "404":
           $ref: "components.yaml#/components/responses/notfound"
         "401":
