@@ -230,7 +230,7 @@ paths:
       summary: Generate/Update the delivery plan for a delivery lot.
       description: Generates or updates the delivery plan based on the delivery lot details.
       responses:
-        "200":
+        "202":
           description: Successfully created/updated the delivery plan.
           content:
             application/json:
