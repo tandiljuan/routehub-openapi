@@ -112,7 +112,7 @@ paths:
             examples:
               $ref: "delivery-lots_examples.yaml#/request/create"
       responses:
-        "200":
+        "201":
           description: The newly created delivery lot.
           content:
             application/json:

@@ -97,8 +97,8 @@ paths:
             examples:
               $ref: "vehicles_examples.yaml#/request/create"
       responses:
-        "200":
-          description: Vehicle successfully added.
+        "201":
+          description: Vehicle successfully created.
           content:
             application/json:
               schema:

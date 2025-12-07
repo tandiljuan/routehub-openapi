@@ -108,7 +108,7 @@ paths:
             examples:
               $ref: "deliveries_examples.yaml#/request/create"
       responses:
-        "200":
+        "201":
           description: The newly created delivery.
           content:
             application/json:
