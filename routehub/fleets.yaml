@@ -72,8 +72,8 @@ paths:
             examples:
               $ref: "fleets_examples.yaml#/request/create"
       responses:
-        "200":
-          description: Fleet successfully added.
+        "201":
+          description: Fleet successfully created.
           content:
             application/json:
               schema:

@@ -71,7 +71,7 @@ paths:
             examples:
               $ref: "milestones_examples.yaml#/request/create"
       responses:
-        "200":
+        "201":
           description: Successfully created milestone with its assigned ID.
           content:
             application/json:

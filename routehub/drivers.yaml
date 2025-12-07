@@ -96,7 +96,7 @@ paths:
             examples:
               $ref: "drivers_examples.yaml#/request/create"
       responses:
-        "200":
+        "201":
           description: The newly created driver.
           content:
             application/json:
