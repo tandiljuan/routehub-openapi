@@ -6,11 +6,9 @@ components:
 
   schemas:
 
-    vehicle:
-      description: Vehicle Entity Definition
+    vehicle_base:
+      description: Base Vehicle Entity Definition
       type: object
-      required:
-        - name
       properties:
         name:
           type: string
@@ -51,6 +49,49 @@ components:
             - ELECTRIC
             - MECHANIC # Human Powered
 
+    vehicle_get:
+      description: HTTP GET Vehicle Entity Definition
+      required:
+        - id
+        - name
+      allOf:
+        - $ref: "components.yaml#/components/schemas/id_number"
+        - $ref: "#/components/schemas/vehicle_base"
+
+    vehicle_patch:
+      description: HTTP PATCH Vehicle Entity Definition
+      allOf:
+        - $ref: "#/components/schemas/vehicle_base"
+
+    vehicle_post:
+      description: HTTP POST Vehicle Entity Definition
+      required:
+        - name
+      allOf:
+        - $ref: "#/components/schemas/vehicle_patch"
+
+  responses:
+
+    vehicle:
+      description: A vehicle successfully retrieved.
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/vehicle_get"
+          examples:
+            $ref: "vehicles_examples.yaml#/unit/200"
+
+    vehicle_list:
+      description: A list of vehicles successfully retrieved.
+      content:
+        application/json:
+          schema:
+            type: array
+            items:
+              $ref: "#/components/schemas/vehicle_get"
+          examples:
+            $ref: "vehicles_examples.yaml#/list/200"
+
 
 # =====================
 # Vehicles Paths (CRUD)
@@ -69,17 +110,7 @@ paths:
       description: Fetches a list of all vehicles registered in the system. The response includes details such as vehicle name, volume, consumption, and category type.
       responses:
         "200":
-          description: A list of vehicles successfully retrieved.
-          content:
-            application/json:
-              schema:
-                type: array
-                items:
-                  allOf:
-                    - $ref: "components.yaml#/components/schemas/id_number"
-                    - $ref: "#/components/schemas/vehicle"
-              examples:
-                $ref: "vehicles_examples.yaml#/list/200"
+          $ref: "#/components/responses/vehicle_list"
         "401":
           $ref: "components.yaml#/components/responses/unauthorized"
 
@@ -93,7 +124,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/vehicle"
+              $ref: "#/components/schemas/vehicle_post"
             examples:
               $ref: "vehicles_examples.yaml#/request/create"
       responses:
@@ -102,14 +133,7 @@ paths:
           headers:
             Location:
               $ref: "components.yaml#/components/headers/created_url"
-          content:
-            application/json:
-              schema:
-                allOf:
-                  - $ref: "components.yaml#/components/schemas/id_number"
-                  - $ref: "#/components/schemas/vehicle"
-              examples:
-                $ref: "vehicles_examples.yaml#/unit/200"
+          $ref: "#/components/responses/vehicle"
         "401":
           $ref: "components.yaml#/components/responses/unauthorized"
 
@@ -124,15 +148,8 @@ paths:
       description: Fetches detailed information about a specific vehicle identified by its unique ID. The response includes all relevant vehicle details such as name, volume, consumption, and engine type.
       responses:
         "200":
-          description: Vehicle information successfully retrieved.
-          content:
-            application/json:
-              schema:
-                allOf:
-                  - $ref: "components.yaml#/components/schemas/id_number"
-                  - $ref: "#/components/schemas/vehicle"
-              examples:
-                $ref: "vehicles_examples.yaml#/unit/200"
+          description: Vehicle successfully retrieved.
+          $ref: "#/components/responses/vehicle"
         "404":
           $ref: "components.yaml#/components/responses/notfound"
         "401":
@@ -148,20 +165,13 @@ paths:
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/vehicle"
+              $ref: "#/components/schemas/vehicle_patch"
             examples:
               $ref: "vehicles_examples.yaml#/request/update"
       responses:
         "200":
-          description: Vehicle information successfully updated.
-          content:
-            application/json:
-              schema:
-                allOf:
-                  - $ref: "components.yaml#/components/schemas/id_number"
-                  - $ref: "#/components/schemas/vehicle"
-              examples:
-                $ref: "vehicles_examples.yaml#/unit/200"
+          description: Vehicle successfully updated.
+          $ref: "#/components/responses/vehicle"
         "404":
           $ref: "components.yaml#/components/responses/notfound"
         "401":
