@@ -6,8 +6,8 @@ components:
 
   schemas:
 
-    milestone:
-      description: Driver Entity Definition
+    milestone_base:
+      description: Base Milestone Entity Definition
       type: object
       properties:
         name:
@@ -24,6 +24,49 @@ components:
             - LOADING_POINT
             - WAREHOUSE
             - TRANSFER_POINT
+
+    milestone_get:
+      description: HTTP GET Milestone Entity Definition
+      required:
+        - id
+        - name
+      allOf:
+        - $ref: "components.yaml#/components/schemas/id_number"
+        - $ref: "#/components/schemas/milestone_base"
+
+    milestone_patch:
+      description: HTTP PATCH Milestone Entity Definition
+      allOf:
+        - $ref: "#/components/schemas/milestone_base"
+
+    milestone_post:
+      description: HTTP POST Milestone Entity Definition
+      required:
+        - name
+      allOf:
+        - $ref: "#/components/schemas/milestone_patch"
+
+  responses:
+
+    milestone:
+      description: A milestone successfully retrieved.
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/milestone_get"
+          examples:
+            $ref: "milestones_examples.yaml#/unit/200"
+
+    milestone_list:
+      description: A list of milestones successfully retrieved.
+      content:
+        application/json:
+          schema:
+            type: array
+            items:
+              $ref: "#/components/schemas/milestone_get"
+          examples:
+            $ref: "milestones_examples.yaml#/list/200"
 
 
 # =======================
@@ -43,17 +86,7 @@ paths:
       description: Retrieves a list of all existing milestones.
       responses:
         "200":
-          description: A list of milestones.
-          content:
-            application/json:
-              schema:
-                type: array
-                items:
-                  allOf:
-                    - $ref: "components.yaml#/components/schemas/id_number"
-                    - $ref: "#/components/schemas/milestone"
-              examples:
-                $ref: "milestones_examples.yaml#/list/200"
+          $ref: "#/components/responses/milestone_list"
         "401":
           $ref: "components.yaml#/components/responses/unauthorized"
 
@@ -67,23 +100,16 @@ paths:
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/milestone"
+              $ref: "#/components/schemas/milestone_post"
             examples:
               $ref: "milestones_examples.yaml#/request/create"
       responses:
         "201":
-          description: Successfully created milestone with its assigned ID.
+          description: Milestone successfully created.
           headers:
             Location:
               $ref: "components.yaml#/components/headers/created_url"
-          content:
-            application/json:
-              schema:
-                allOf:
-                  - $ref: "components.yaml#/components/schemas/id_number"
-                  - $ref: "#/components/schemas/milestone"
-              examples:
-                $ref: "milestones_examples.yaml#/unit/200"
+          $ref: "#/components/responses/milestone"
         "401":
           $ref: "components.yaml#/components/responses/unauthorized"
 
@@ -98,15 +124,8 @@ paths:
       description: Retrieves a single milestone identified by its unique ID.
       responses:
         "200":
-          description: Successfully retrieved milestone.
-          content:
-            application/json:
-              schema:
-                allOf:
-                  - $ref: "components.yaml#/components/schemas/id_number"
-                  - $ref: "#/components/schemas/milestone"
-              examples:
-                $ref: "milestones_examples.yaml#/unit/200"
+          description: Milestone successfully retrieved.
+          $ref: "#/components/responses/milestone"
         "404":
           $ref: "components.yaml#/components/responses/notfound"
         "401":
@@ -122,20 +141,13 @@ paths:
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/milestone"
+              $ref: "#/components/schemas/milestone_patch"
             examples:
               $ref: "milestones_examples.yaml#/request/update"
       responses:
         "200":
-          description: Successfully updated milestone.
-          content:
-            application/json:
-              schema:
-                allOf:
-                  - $ref: "components.yaml#/components/schemas/id_number"
-                  - $ref: "#/components/schemas/milestone"
-              examples:
-                $ref: "milestones_examples.yaml#/unit/200"
+          description: Milestone successfully updated.
+          $ref: "#/components/responses/milestone"
         "404":
           $ref: "components.yaml#/components/responses/notfound"
         "401":
