@@ -6,8 +6,8 @@ components:
 
   schemas:
 
-    delivery_lot:
-      description: Delivery Lot Entity Definition
+    delivery_lot_submit_only:
+      description: Submit-Only Delivery Lot Entity Definition
       type: object
       properties:
         milestone_id:
@@ -26,6 +26,27 @@ components:
           type: array
           items:
             type: integer
+
+    delivery_lot_response_only:
+      description: Response-Only Delivery Lot Entity Definition
+      type: object
+      properties:
+        milestone:
+          description: "Location from which the deliveries will depart."
+          $ref: "milestones.yaml#/components/schemas/milestone_get"
+        deliveries:
+          description: "List of deliveries in the lot."
+          type: array
+          items:
+            $ref: "deliveries.yaml#/components/schemas/delivery_get"
+        fleet:
+          description: "Fleet designated for distribution."
+          $ref: "fleets.yaml#/components/schemas/fleet_get"
+        drivers:
+          description: "List of drivers designated for distribution tasks."
+          type: array
+          items:
+            $ref: "drivers.yaml#/components/schemas/driver_get"
         state:
           description: "Current status of the delivery lot."
           type: string
@@ -34,27 +55,45 @@ components:
             - PROCESSING
             - PROCESSED
 
-    delivery_path:
-      description: Delivery Path Entity Definition
+    delivery_lot_get:
+      description: HTTP GET Delivery Lot Entity Definition
+      required:
+        - id
+      allOf:
+        - $ref: "components.yaml#/components/schemas/id_number"
+        - $ref: "#/components/schemas/delivery_lot_response_only"
+
+    delivery_lot_patch:
+      description: HTTP PATCH Delivery Lot Entity Definition
+      allOf:
+        - $ref: "#/components/schemas/delivery_lot_submit_only"
+
+    delivery_lot_post:
+      description: HTTP POST Delivery Lot Entity Definition
+      allOf:
+        - $ref: "#/components/schemas/delivery_lot_submit_only"
+
+    delivery_path_response_only:
+      description: Response-Only Delivery Path Entity Definition
       type: object
       properties:
-        milestone_id:
+        milestone:
           description: "Location from which the delivery will depart."
-          type: integer
-        vehicle_id:
+          $ref: "milestones.yaml#/components/schemas/milestone_get"
+        vehicle:
           description: "Vehicle that will be used for the delivery."
-          type: integer
-        driver_id:
+          $ref: "vehicles.yaml#/components/schemas/vehicle_get"
+        driver:
           description: "Driver assigned to the delivery."
-          type: integer
+          $ref: "drivers.yaml#/components/schemas/driver_get"
         delivery_units:
           description: "List of items to be delivered."
           type: array
           items:
-            type: integer
+            $ref: "deliveries.yaml#/components/schemas/delivery_get"
 
-    delivery_plan:
-      description: Delivery Plan Entity Definition
+    delivery_plan_response_only:
+      description: Response-Only Delivery Plan Entity Definition
       type: object
       properties:
         delivery_lot_id:
@@ -64,7 +103,43 @@ components:
           description: "List of delivery paths."
           type: array
           items:
-            $ref: "#/components/schemas/delivery_path"
+            $ref: "#/components/schemas/delivery_path_response_only"
+
+    delivery_plan_get:
+      description: HTTP GET Delivery Plan Entity Definition
+      allOf:
+        - $ref: "#/components/schemas/delivery_plan_response_only"
+
+  responses:
+
+    delivery_lot:
+      description: A delivery lot successfully retrieved.
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/delivery_lot_get"
+          examples:
+            $ref: "delivery-lots_examples.yaml#/lot/200"
+
+    delivery_lot_list:
+      description: A list of delivery lots successfully retrieved.
+      content:
+        application/json:
+          schema:
+            type: array
+            items:
+              $ref: "#/components/schemas/delivery_lot_get"
+          examples:
+            $ref: "delivery-lots_examples.yaml#/list/200"
+
+    delivery_plan:
+      description: A delivery plan successfully retrieved.
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/delivery_plan_get"
+          examples:
+            $ref: "delivery-lots_examples.yaml#/plan/200"
 
 
 # ==========================
@@ -84,17 +159,7 @@ paths:
       description: Returns a list of all delivery lots.
       responses:
         "200":
-          description: A list of delivery lots.
-          content:
-            application/json:
-              schema:
-                type: array
-                items:
-                  allOf:
-                    - $ref: "components.yaml#/components/schemas/id_number"
-                    - $ref: "#/components/schemas/delivery_lot"
-              examples:
-                $ref: "delivery-lots_examples.yaml#/list/200"
+          $ref: "#/components/responses/delivery_lot_list"
         "401":
           $ref: "components.yaml#/components/responses/unauthorized"
 
@@ -108,23 +173,16 @@ paths:
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/delivery_lot"
+              $ref: "#/components/schemas/delivery_lot_post"
             examples:
               $ref: "delivery-lots_examples.yaml#/request/create"
       responses:
         "201":
-          description: The newly created delivery lot.
+          description: Delivery lot successfully created.
           headers:
             Location:
               $ref: "components.yaml#/components/headers/created_url"
-          content:
-            application/json:
-              schema:
-                allOf:
-                  - $ref: "components.yaml#/components/schemas/id_number"
-                  - $ref: "#/components/schemas/delivery_lot"
-              examples:
-                $ref: "delivery-lots_examples.yaml#/lot/200"
+          $ref: "#/components/responses/delivery_lot"
         "401":
           $ref: "components.yaml#/components/responses/unauthorized"
 
@@ -139,15 +197,8 @@ paths:
       description: Returns a single delivery lot based on the provided ID.
       responses:
         "200":
-          description: The requested delivery lot.
-          content:
-            application/json:
-              schema:
-                allOf:
-                  - $ref: "components.yaml#/components/schemas/id_number"
-                  - $ref: "#/components/schemas/delivery_lot"
-              examples:
-                $ref: "delivery-lots_examples.yaml#/lot/200"
+          description: Delivery lot successfully retrieved.
+          $ref: "#/components/responses/delivery_lot"
         "404":
           $ref: "components.yaml#/components/responses/notfound"
         "401":
@@ -163,20 +214,13 @@ paths:
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/delivery_lot"
+              $ref: "#/components/schemas/delivery_lot_patch"
             examples:
               $ref: "delivery-lots_examples.yaml#/request/update"
       responses:
         "200":
-          description: The updated delivery lot.
-          content:
-            application/json:
-              schema:
-                allOf:
-                  - $ref: "components.yaml#/components/schemas/id_number"
-                  - $ref: "#/components/schemas/delivery_lot"
-              examples:
-                $ref: "delivery-lots_examples.yaml#/lot/200"
+          description: Delivery lot successfully updated.
+          $ref: "#/components/responses/delivery_lot"
         "404":
           $ref: "components.yaml#/components/responses/notfound"
         "401":
@@ -207,13 +251,8 @@ paths:
       description: Returns the delivery plan associated with a specific delivery lot ID.
       responses:
         "200":
-          description: The delivery plan for the specified delivery lot.
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/delivery_plan"
-              examples:
-                $ref: "delivery-lots_examples.yaml#/plan/200"
+          description: Delivery plan successfully retrieved.
+          $ref: "#/components/responses/delivery_plan"
         "404":
           $ref: "components.yaml#/components/responses/notfound"
         "401":
