@@ -6,17 +6,26 @@ components:
 
   schemas:
 
-    driver_vehicle:
-      description: Driver-Vehicle Entity Definition
+    driver_vehicle_base:
+      description: Base Driver-Vehicle Entity Definition
       type: object
+      required:
+        - quantity
       properties:
-        vehicle_id:
-          type: integer
         quantity:
           type: integer
 
-    driver:
-      description: Driver Entity Definition
+    driver_vehicle_submit_only:
+      description: Submit-Only Driver-Vehicle Entity Definition
+      type: object
+      required:
+        - vehicle_id
+      properties:
+        vehicle_id:
+          type: integer
+
+    driver_base:
+      description: Base Driver Entity Definition
       type: object
       properties:
         first_name:
@@ -45,10 +54,73 @@ components:
             items:
               description: "ISO 6709:DD (geographic point)"
               type: string
+
+    driver_submit_only:
+      description: Submit-Only Driver Entity Definition
+      type: object
+      properties:
         vehicles:
           type: array
           items:
-            $ref: "#/components/schemas/driver_vehicle"
+            allOf:
+              - $ref: "#/components/schemas/driver_vehicle_base"
+              - $ref: "#/components/schemas/driver_vehicle_submit_only"
+
+    driver_response_only:
+      description: Response-Only Driver Entity Definition
+      type: object
+      properties:
+        vehicles:
+          type: array
+          items:
+            allOf:
+              - $ref: "#/components/schemas/driver_vehicle_base"
+              - $ref: "vehicles.yaml#/components/schemas/vehicle_get"
+
+    driver_get:
+      description: HTTP GET Driver Entity Definition
+      required:
+        - id
+        - first_name
+      allOf:
+        - $ref: "components.yaml#/components/schemas/id_number"
+        - $ref: "#/components/schemas/driver_base"
+        - $ref: "#/components/schemas/driver_response_only"
+
+    driver_patch:
+      description: HTTP PATCH Driver Entity Definition
+      allOf:
+        - $ref: "#/components/schemas/driver_base"
+        - $ref: "#/components/schemas/driver_submit_only"
+
+    driver_post:
+      description: HTTP POST Driver Entity Definition
+      required:
+        - first_name
+      allOf:
+        - $ref: "#/components/schemas/driver_patch"
+
+  responses:
+
+      driver:
+        description: A driver successfully retrieved.
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/driver_get"
+            examples:
+              $ref: "drivers_examples.yaml#/unit/200"
+
+      driver_list:
+        description: A list of drivers successfully retrieved.
+        content:
+          application/json:
+            schema:
+              type: array
+              items:
+                $ref: "#/components/schemas/driver_get"
+            examples:
+              $ref: "drivers_examples.yaml#/list/200"
 
 
 # ====================
@@ -68,17 +140,7 @@ paths:
       description: Retrieves a list of all drivers.
       responses:
         "200":
-          description: A list of drivers.
-          content:
-            application/json:
-              schema:
-                type: array
-                items:
-                  allOf:
-                    - $ref: "components.yaml#/components/schemas/id_number"
-                    - $ref: "#/components/schemas/driver"
-              examples:
-                $ref: "drivers_examples.yaml#/list/200"
+          $ref: "#/components/responses/driver_list"
         "401":
           $ref: "components.yaml#/components/responses/unauthorized"
 
@@ -92,23 +154,16 @@ paths:
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/driver"
+              $ref: "#/components/schemas/driver_post"
             examples:
               $ref: "drivers_examples.yaml#/request/create"
       responses:
         "201":
-          description: The newly created driver.
+          description: Driver successfully created.
           headers:
             Location:
               $ref: "components.yaml#/components/headers/created_url"
-          content:
-            application/json:
-              schema:
-                allOf:
-                  - $ref: "components.yaml#/components/schemas/id_number"
-                  - $ref: "#/components/schemas/driver"
-              examples:
-                $ref: "drivers_examples.yaml#/unit/200"
+          $ref: "#/components/responses/driver"
         "401":
           $ref: "components.yaml#/components/responses/unauthorized"
 
@@ -123,15 +178,8 @@ paths:
       description: Retrieves a specific driver by its ID.
       responses:
         "200":
-          description: The requested driver.
-          content:
-            application/json:
-              schema:
-                allOf:
-                  - $ref: "components.yaml#/components/schemas/id_number"
-                  - $ref: "#/components/schemas/driver"
-              examples:
-                $ref: "drivers_examples.yaml#/unit/200"
+          description: Driver successfully retrieved.
+          $ref: "#/components/responses/driver"
         "404":
           $ref: "components.yaml#/components/responses/notfound"
         "401":
@@ -147,20 +195,13 @@ paths:
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/driver"
+              $ref: "#/components/schemas/driver_patch"
             examples:
               $ref: "drivers_examples.yaml#/request/update"
       responses:
         "200":
-          description: The updated driver.
-          content:
-            application/json:
-              schema:
-                allOf:
-                  - $ref: "components.yaml#/components/schemas/id_number"
-                  - $ref: "#/components/schemas/driver"
-              examples:
-                $ref: "drivers_examples.yaml#/unit/200"
+          description: Driver successfully updated.
+          $ref: "#/components/responses/driver"
         "404":
           $ref: "components.yaml#/components/responses/notfound"
         "401":
