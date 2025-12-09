@@ -105,6 +105,8 @@ components:
       description: HTTP GET Delivery Entity Definition
       required:
         - id
+        - milestone
+        - destination
       allOf:
         - $ref: "components.yaml#/components/schemas/id_number"
         - $ref: "#/components/schemas/delivery_base"
@@ -118,6 +120,9 @@ components:
 
     delivery_post:
       description: HTTP POST Delivery Entity Definition
+      required:
+        - milestone_id
+        - destination
       allOf:
         - $ref: "#/components/schemas/delivery_patch"
 

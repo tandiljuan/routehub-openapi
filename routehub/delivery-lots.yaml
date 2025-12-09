@@ -109,6 +109,9 @@ components:
       description: HTTP GET Delivery Lot Entity Definition
       required:
         - id
+        - milestone
+        - deliveries
+        - state
       allOf:
         - $ref: "components.yaml#/components/schemas/id_number"
         - $ref: "#/components/schemas/delivery_lot_response_only"
@@ -122,12 +125,18 @@ components:
 
     delivery_lot_post:
       description: HTTP POST Delivery Lot Entity Definition
+      required:
+        - milestone_id
+        - deliveries
       allOf:
         - $ref: "#/components/schemas/delivery_lot_patch"
 
     delivery_path_response_only:
       description: Response-Only Delivery Path Entity Definition
       type: object
+      required:
+        - milestone
+        - delivery_units
       properties:
         milestone:
           description: "Location from which the delivery will depart."
@@ -147,6 +156,9 @@ components:
     delivery_plan_response_only:
       description: Response-Only Delivery Plan Entity Definition
       type: object
+      required:
+        - delivery_lot_id
+        - delivery_paths
       properties:
         delivery_lot_id:
           description: "Delivery lot from which the plan is created."
