@@ -15,7 +15,7 @@ components:
         location:
           description: "ISO 6709:DD (Standard representation of geographic point location by coordinates)"
           type: string
-        milestone_category:
+        category:
           description: The type of location associated with the milestone.
           type: string
           enum:

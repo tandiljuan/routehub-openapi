@@ -11,10 +11,10 @@ milestone:
   "payload1.0": &payload1.0
     name: "Main Depot"
     location: "+37.7749-122.4194/"
-    milestone_category: "DEPOT"
+    category: "DEPOT"
   "payload1.1": &payload1.1
     name: "Main Distribution Point"
-    milestone_category: "DISTRIBUTION_CENTER"
+    category: "DISTRIBUTION_CENTER"
   "1.0": &milestone1.0
     <<: *payload1.0
     id: 1
