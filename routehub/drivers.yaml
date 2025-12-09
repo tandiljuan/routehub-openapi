@@ -41,6 +41,9 @@ components:
         start_point:
           description: "ISO 6709:DD (Standard representation of geographic point location by coordinates)"
           type: string
+        end_point:
+          description: "ISO 6709:DD (Standard representation of geographic point location by coordinates)"
+          type: string
         work_areas:
           description: "A collection of geographic working areas."
           type: array
