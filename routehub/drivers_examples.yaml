@@ -13,7 +13,7 @@ driver:
     last_name: "Doe"
     work_schedules:
       - "DTSTART:20250101T120000Z\nDURATION:PT8H\nRRULE:FREQ=DAILY"
-    start_point: "37.7749,-122.4194"
+    start_point: "+37.7749-122.4194/"
     work_areas:
       - # Working Area #1
         - "37.7749,-122.4194"

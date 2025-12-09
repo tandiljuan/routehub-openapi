@@ -10,7 +10,7 @@ milestone:
 
   "payload1.0": &payload1.0
     name: "Main Depot"
-    location: "37.7749,-122.4194"
+    location: "+37.7749-122.4194/"
     milestone_category: "DEPOT"
   "payload1.1": &payload1.1
     name: "Main Distribution Point"

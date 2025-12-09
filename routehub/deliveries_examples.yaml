@@ -11,7 +11,7 @@ delivery:
   "payload1.0": &payload1.0
     delivery_method: "DELIVERY"
     milestone_id: 1
-    destination: "37.7749,-122.4194"
+    destination: "+37.7749-122.4194/"
     schedule: ["DTSTART:20240704T120000Z"]
     width: 10
     height: 20
