@@ -54,6 +54,7 @@ components:
             - UNPROCESSED
             - PROCESSING
             - PROCESSED
+            - CANCELED
 
     delivery_lot_get:
       description: HTTP GET Delivery Lot Entity Definition
