@@ -5,6 +5,55 @@
 components:
 
 
+  # -----
+  # Types
+  # -----
+
+  types:
+
+    length_unit:
+      description: Generic length unit enumeration
+      type: string
+      enum:
+        - CENTIMETER
+        - METER
+        - KILOMETER
+        - INCH
+        - FEET
+        - MILE
+
+    volume_unit:
+      description: Generic volume unit enumeration
+      type: string
+      enum:
+        - CUBIC_CENTIMETER
+        - CUBIC_METER
+        - LITER
+        - CUBIC_INCH
+        - CUBIC_FEET
+        - GALLON
+
+    weight_unit:
+      description: Generic weight unit enumeration
+      type: string
+      enum:
+        - GRAMS
+        - KILOGRAMS
+        - METRIC_TON
+        - OUNCES
+        - POUNDS
+        - SHORT_TON
+        - LONG_TON
+
+    time_unit:
+      description: Generic time unit enumeration
+      type: string
+      enum:
+        - SECOND
+        - MINUTE
+        - HOUR
+
+
   # -------
   # Schemas
   # -------
