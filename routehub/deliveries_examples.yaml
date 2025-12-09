@@ -21,6 +21,9 @@ delivery:
     volume_unit: "CUBIC_CENTIMETER"
     weight: 1000
     weight_unit: "GRAMS"
+    packaging: "BOX"
+    value_cents: "2500"
+    value_currency: "USD"
   "payload1.1": &payload1.1
     width: 15
     height: 25
