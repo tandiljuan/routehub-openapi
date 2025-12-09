@@ -19,7 +19,7 @@ components:
         destination:
           description: "ISO 6709:DD (Standard representation of geographic point location by coordinates)"
           type: string
-        schedule:
+        schedules:
           description: "List of delivery schedules"
           type: array
           items:
