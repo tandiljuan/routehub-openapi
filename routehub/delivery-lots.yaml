@@ -6,6 +6,55 @@ components:
 
   schemas:
 
+    delivery_lot_base:
+      description: Base Delivery Lot Entity Definition
+      type: object
+      properties:
+        vehicle_limits:
+          description: Vehicle restrictions
+          type: object
+          properties:
+            volume_min:
+              description: "Minimum loading volume percentage."
+              type: integer
+            volume_max:
+              description: "Maximum loading volume percentage."
+              type: integer
+            capacity_min:
+              description: "Minimum packages capacity."
+              type: integer
+            capacity_max:
+              description: "Maximum packages capacity."
+              type: integer
+        route_limits:
+          description: Route restrictions
+          type: object
+          properties:
+            stops_min:
+              description: "Minimum required stops."
+              type: integer
+            stops_max:
+              description: "Maximum required stops."
+              type: integer
+            length_min:
+              description: "Minimum distance for a delivery route."
+              type: integer
+            length_max:
+              description: "Maximum distance for a delivery route."
+              type: integer
+            length_unit:
+              description: "Distance unit."
+              $ref: "components.yaml#/components/types/length_unit"
+            time_min:
+              description: "Minimum delivery route time."
+              type: integer
+            time_max:
+              description: "Maximum delivery route time."
+              type: integer
+            time_unit:
+              description: "Time unit."
+              $ref: "components.yaml#/components/types/time_unit"
+
     delivery_lot_submit_only:
       description: Submit-Only Delivery Lot Entity Definition
       type: object
@@ -63,16 +112,18 @@ components:
       allOf:
         - $ref: "components.yaml#/components/schemas/id_number"
         - $ref: "#/components/schemas/delivery_lot_response_only"
+        - $ref: "#/components/schemas/delivery_lot_base"
 
     delivery_lot_patch:
       description: HTTP PATCH Delivery Lot Entity Definition
       allOf:
         - $ref: "#/components/schemas/delivery_lot_submit_only"
+        - $ref: "#/components/schemas/delivery_lot_base"
 
     delivery_lot_post:
       description: HTTP POST Delivery Lot Entity Definition
       allOf:
-        - $ref: "#/components/schemas/delivery_lot_submit_only"
+        - $ref: "#/components/schemas/delivery_lot_patch"
 
     delivery_path_response_only:
       description: Response-Only Delivery Path Entity Definition
