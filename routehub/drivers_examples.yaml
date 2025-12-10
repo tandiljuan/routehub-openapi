@@ -27,8 +27,8 @@ driver:
     first_name: "Jane"
     last_name: "Smith"
   "1.0": &driver1.0
-    <<: *payload1.0
     id: 1
+    <<: *payload1.0
   "1.1": &driver1.1
     # @see https://yaml.org/type/merge.html
     <<: *payload1.1
