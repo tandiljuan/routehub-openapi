@@ -20,8 +20,8 @@ delivery-lot:
       - 1
       - 2
   "1.0": &delivery-lot1.0
-    <<: *payload1.0
     id: 1
+    <<: *payload1.0
     state: "UNPROCESSED"
   "1.1": &delivery-lot1.1
     # @see https://yaml.org/type/merge.html

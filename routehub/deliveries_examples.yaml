@@ -31,8 +31,8 @@ delivery:
     volume: 6500
     weight: 1500
   "1.0": &delivery1.0
-    <<: *payload1.0
     id: 1
+    <<: *payload1.0
   "1.1": &delivery1.1
     # @see https://yaml.org/type/merge.html
     <<: *payload1.1

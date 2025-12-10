@@ -16,8 +16,8 @@ milestone:
     name: "Main Distribution Point"
     category: "DISTRIBUTION_CENTER"
   "1.0": &milestone1.0
-    <<: *payload1.0
     id: 1
+    <<: *payload1.0
   "1.1": &milestone1.1
     # @see https://yaml.org/type/merge.html
     <<: *payload1.1
