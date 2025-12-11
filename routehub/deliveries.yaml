@@ -193,6 +193,31 @@ paths:
         "401":
           $ref: "components.yaml#/components/responses/unauthorized"
 
+  /deliveries/bulk:
+
+    post:
+      operationId: deliveries-bulk-post
+      tags: [ deliveries ]
+      summary: Process a bulk of deliveries.
+      description: Creates a bulk of deliveries in one call.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/delivery_post"
+            examples:
+              $ref: "deliveries_examples.yaml#/request/create"
+      responses:
+        "201":
+          description: Bundle created.
+          headers:
+            X-Location:
+              $ref: "components.yaml#/components/headers/created_url"
+          $ref: "#/components/responses/delivery"
+        "401":
+          $ref: "components.yaml#/components/responses/unauthorized"
+
   /deliveries/{id}:
     parameters:
       - $ref: "components.yaml#/components/parameters/path_id_number"
