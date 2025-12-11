@@ -73,6 +73,9 @@ paths:
       responses:
         "201":
           description: Successfully created milestone with its assigned ID.
+          headers:
+            Location:
+              $ref: "components.yaml#/components/headers/created_url"
           content:
             application/json:
               schema:

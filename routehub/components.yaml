@@ -43,6 +43,18 @@ components:
         type: integer
 
 
+  # -------
+  # Headers
+  # -------
+
+  headers:
+
+    created_url:
+      description: URL of the newly created resource.
+      schema:
+        type: string
+
+
   # ---------
   # Responses
   # ---------

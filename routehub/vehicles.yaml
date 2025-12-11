@@ -99,6 +99,9 @@ paths:
       responses:
         "201":
           description: Vehicle successfully created.
+          headers:
+            Location:
+              $ref: "components.yaml#/components/headers/created_url"
           content:
             application/json:
               schema:
