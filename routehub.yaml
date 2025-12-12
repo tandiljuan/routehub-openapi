@@ -37,6 +37,7 @@ paths:
   /milestones/{id}: { $ref: "routehub/milestones.yaml#/paths/~1milestones~1{id}" }
 
   /deliveries:      { $ref: "routehub/deliveries.yaml#/paths/~1deliveries" }
+  /deliveries/bulk: { $ref: "routehub/deliveries.yaml#/paths/~1deliveries~1bulk" }
   /deliveries/{id}: { $ref: "routehub/deliveries.yaml#/paths/~1deliveries~1{id}" }
 
   /lots:           { $ref: "routehub/delivery-lots.yaml#/paths/~1lots" }

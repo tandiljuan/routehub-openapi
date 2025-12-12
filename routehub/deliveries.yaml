@@ -148,6 +148,15 @@ components:
           examples:
             $ref: "deliveries_examples.yaml#/list/200"
 
+    bulk:
+      description: A bulk of deliveries successfully retrieved.
+      content:
+        application/json:
+          schema:
+            type: array
+            items:
+              $ref: "components.yaml#/components/types/id"
+
 
 # =======================
 # Deliveries Paths (CRUD)
@@ -190,6 +199,27 @@ paths:
             Location:
               $ref: "components.yaml#/components/headers/created_url"
           $ref: "#/components/responses/delivery"
+        "401":
+          $ref: "components.yaml#/components/responses/unauthorized"
+
+  /deliveries/bulk:
+
+    post:
+      operationId: deliveries-bulk-post
+      tags: [ deliveries ]
+      summary: Process a bulk of deliveries.
+      description: Creates a bulk of deliveries in one call.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: array
+              items:
+                $ref: "#/components/schemas/delivery_post"
+      responses:
+        "200":
+          $ref: "#/components/responses/bulk"
         "401":
           $ref: "components.yaml#/components/responses/unauthorized"
 
