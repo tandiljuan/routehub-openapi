@@ -59,7 +59,7 @@ components:
         - id
         - name
       allOf:
-        - $ref: "components.yaml#/components/schemas/id_number"
+        - $ref: "components.yaml#/components/schemas/entity_id"
         - $ref: "#/components/schemas/fleet_base"
         - $ref: "#/components/schemas/fleet_response_only"
 
