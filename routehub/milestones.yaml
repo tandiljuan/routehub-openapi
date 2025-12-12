@@ -32,7 +32,7 @@ components:
         - name
         - location
       allOf:
-        - $ref: "components.yaml#/components/schemas/id_number"
+        - $ref: "components.yaml#/components/schemas/entity_id"
         - $ref: "#/components/schemas/milestone_base"
 
     milestone_patch:

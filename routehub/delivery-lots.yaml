@@ -113,7 +113,7 @@ components:
         - deliveries
         - state
       allOf:
-        - $ref: "components.yaml#/components/schemas/id_number"
+        - $ref: "components.yaml#/components/schemas/entity_id"
         - $ref: "#/components/schemas/delivery_lot_response_only"
         - $ref: "#/components/schemas/delivery_lot_base"
 

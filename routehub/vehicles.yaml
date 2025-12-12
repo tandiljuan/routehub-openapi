@@ -48,7 +48,7 @@ components:
         - id
         - name
       allOf:
-        - $ref: "components.yaml#/components/schemas/id_number"
+        - $ref: "components.yaml#/components/schemas/entity_id"
         - $ref: "#/components/schemas/vehicle_base"
 
     vehicle_patch:

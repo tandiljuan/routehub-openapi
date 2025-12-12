@@ -73,8 +73,8 @@ components:
         message:
           type: string
 
-    id_number:
-      description: Entity Identification by Number
+    entity_id:
+      description: Entity Identification
       type: object
       properties:
         id:

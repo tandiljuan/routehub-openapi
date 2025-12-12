@@ -108,7 +108,7 @@ components:
         - milestone
         - destination
       allOf:
-        - $ref: "components.yaml#/components/schemas/id_number"
+        - $ref: "components.yaml#/components/schemas/entity_id"
         - $ref: "#/components/schemas/delivery_base"
         - $ref: "#/components/schemas/delivery_response_only"
 
