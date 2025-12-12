@@ -132,7 +132,7 @@ paths:
 
   /vehicles/{id}:
     parameters:
-      - $ref: "components.yaml#/components/parameters/path_id_number"
+      - $ref: "components.yaml#/components/parameters/path_id"
 
     get:
       operationId: vehicles-id-get

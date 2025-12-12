@@ -252,7 +252,7 @@ paths:
 
   /lots/{id}:
     parameters:
-      - $ref: "components.yaml#/components/parameters/path_id_number"
+      - $ref: "components.yaml#/components/parameters/path_id"
 
     get:
       operationId: delivery-lots-id-get
@@ -306,7 +306,7 @@ paths:
 
   /lots/{id}/plan:
     parameters:
-      - $ref: "components.yaml#/components/parameters/path_id_number"
+      - $ref: "components.yaml#/components/parameters/path_id"
 
     get:
       operationId: delivery-lots-plan-get

@@ -88,8 +88,8 @@ components:
 
   parameters:
 
-    path_id_number:
-      description: Entity Identification by Number
+    path_id:
+      description: Entity Identification
       in: path
       name: id
       required: true

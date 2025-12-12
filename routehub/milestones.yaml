@@ -117,7 +117,7 @@ paths:
 
   /milestones/{id}:
     parameters:
-      - $ref: "components.yaml#/components/parameters/path_id_number"
+      - $ref: "components.yaml#/components/parameters/path_id"
 
     get:
       operationId: milestones-id-get
