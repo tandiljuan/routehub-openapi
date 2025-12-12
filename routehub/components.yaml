@@ -11,6 +11,10 @@ components:
 
   types:
 
+    id:
+      description: A generic ID definition
+      type: string
+
     length_unit:
       description: Generic length unit enumeration
       type: string
@@ -74,7 +78,8 @@ components:
       type: object
       properties:
         id:
-          type: integer
+          description: Entity Identification
+          $ref: "#/components/types/id"
 
 
   # ----------
@@ -89,7 +94,7 @@ components:
       name: id
       required: true
       schema:
-        type: integer
+        $ref: "#/components/types/id"
 
 
   # -------
