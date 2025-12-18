@@ -8,13 +8,22 @@
     "@redocly/cli": "^2.0.5"
   },
   "optionalDependencies": {
-    "@stoplight/prism-cli": "^5.14.2"
+    "@stoplight/prism-cli": "^5.14.2",
+    "concurrently": "^9.2.1",
+    "http-server": "^14.1.1",
+    "nodemon": "^3.1.11"
   },
   "scripts": {
     "lint": "redocly lint routehub.yaml",
     "bundle-yaml": "redocly bundle -o rhbundle.yaml routehub.yaml",
     "bundle-json": "redocly bundle -o rhbundle.json routehub.yaml",
     "build-man": "redocly build-docs -o rhmanual.html routehub.yaml",
+    "watch-man:dir": "node -e \"const fs=require('fs');const dir='docs_dev';if(!fs.existsSync(dir)){fs.mkdirSync(dir)}\"",
+    "watch-man:build": "redocly build-docs -o docs_dev/index.html routehub.yaml",
+    "watch-man:monit": "nodemon -e yaml -x \"npm run watch-man:build\"",
+    "watch-man:httpd": "http-server docs_dev --port 3000",
+    "prewatch-man": "npm run watch-man:dir",
+    "watch-man": "concurrently -n 'build,http' 'npm run watch-man:monit' 'npm run watch-man:httpd'",
     "premock": "node -e \"if(!require('fs').existsSync('rhbundle.yaml')){process.exit(1)}\" || npm run bundle-yaml",
     "mock": "prism mock rhbundle.yaml",
     "respect": "redocly respect arazzo/* --input token='1234' --server route_hub_api='http://127.0.0.1:4010'"
