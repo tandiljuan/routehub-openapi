@@ -79,14 +79,8 @@ paths:
                     - $ref: "#/components/schemas/driver"
               examples:
                 $ref: "drivers_examples.yaml#/list/200"
-        "403":
-          description: Access to the requested resource is forbidden.
-          content:
-            application/json:
-              schema:
-                $ref: "components.yaml#/components/schemas/generic"
-              example:
-                $ref: "components.yaml#/examples/generic/403/value"
+        "401":
+          $ref: "components.yaml#/components/responses/unauthorized"
 
     post:
       operationId: drivers-post
@@ -112,14 +106,8 @@ paths:
                   - $ref: "#/components/schemas/driver"
               examples:
                 $ref: "drivers_examples.yaml#/unit/200"
-        "403":
-          description: Access to the requested resource is forbidden.
-          content:
-            application/json:
-              schema:
-                $ref: "components.yaml#/components/schemas/generic"
-              example:
-                $ref: "components.yaml#/examples/generic/403/value"
+        "401":
+          $ref: "components.yaml#/components/responses/unauthorized"
 
   /drivers/{id}:
     parameters:
@@ -142,13 +130,9 @@ paths:
               examples:
                 $ref: "drivers_examples.yaml#/unit/200"
         "404":
-          description: Driver not found.
-          content:
-            application/json:
-              schema:
-                $ref: "components.yaml#/components/schemas/generic"
-              example:
-                $ref: "components.yaml#/examples/generic/404/value"
+          $ref: "components.yaml#/components/responses/notfound"
+        "401":
+          $ref: "components.yaml#/components/responses/unauthorized"
 
     patch:
       operationId: drivers-id-put
@@ -175,13 +159,9 @@ paths:
               examples:
                 $ref: "drivers_examples.yaml#/unit/200"
         "404":
-          description: Driver not found.
-          content:
-            application/json:
-              schema:
-                $ref: "components.yaml#/components/schemas/generic"
-              example:
-                $ref: "components.yaml#/examples/generic/404/value"
+          $ref: "components.yaml#/components/responses/notfound"
+        "401":
+          $ref: "components.yaml#/components/responses/unauthorized"
 
     delete:
       operationId: drivers-id-delete
@@ -198,10 +178,6 @@ paths:
               example:
                 $ref: "components.yaml#/examples/generic/200/value"
         "404":
-          description: Driver not found.
-          content:
-            application/json:
-              schema:
-                $ref: "components.yaml#/components/schemas/generic"
-              example:
-                $ref: "components.yaml#/examples/generic/404/value"
+          $ref: "components.yaml#/components/responses/notfound"
+        "401":
+          $ref: "components.yaml#/components/responses/unauthorized"
