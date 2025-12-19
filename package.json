@@ -28,6 +28,8 @@
     "watch-man": "concurrently -n 'build,http' 'npm run watch-man:monit' 'npm run watch-man:httpd'",
     "premock": "npm run bundle-yaml:ifmis",
     "mock": "prism mock rhbundle.yaml",
+    "proxy:httpd": "prism proxy rhbundle.yaml http://localhost:3000 --errors",
+    "proxy": "nodemon -e yaml -i rhbundle.yaml -x \"npm run bundle-yaml:rm && npm run bundle-yaml && npm run proxy:httpd\"",
     "respect": "redocly respect arazzo/* --input token='1234' --server route_hub_api='http://127.0.0.1:4010'"
   },
   "engines": {
