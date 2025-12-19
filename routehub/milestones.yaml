@@ -32,7 +32,7 @@ components:
         - name
         - location
       allOf:
-        - $ref: "components.yaml#/components/schemas/id_number"
+        - $ref: "components.yaml#/components/schemas/entity_id"
         - $ref: "#/components/schemas/milestone_base"
 
     milestone_patch:
@@ -117,7 +117,7 @@ paths:
 
   /milestones/{id}:
     parameters:
-      - $ref: "components.yaml#/components/parameters/path_id_number"
+      - $ref: "components.yaml#/components/parameters/path_id"
 
     get:
       operationId: milestones-id-get

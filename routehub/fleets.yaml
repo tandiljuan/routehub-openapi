@@ -59,7 +59,7 @@ components:
         - id
         - name
       allOf:
-        - $ref: "components.yaml#/components/schemas/id_number"
+        - $ref: "components.yaml#/components/schemas/entity_id"
         - $ref: "#/components/schemas/fleet_base"
         - $ref: "#/components/schemas/fleet_response_only"
 
@@ -145,7 +145,7 @@ paths:
 
   /fleets/{id}:
     parameters:
-      - $ref: "components.yaml#/components/parameters/path_id_number"
+      - $ref: "components.yaml#/components/parameters/path_id"
 
     get:
       operationId: fleets-id-get

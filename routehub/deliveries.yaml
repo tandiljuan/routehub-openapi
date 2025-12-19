@@ -108,7 +108,7 @@ components:
         - milestone
         - destination
       allOf:
-        - $ref: "components.yaml#/components/schemas/id_number"
+        - $ref: "components.yaml#/components/schemas/entity_id"
         - $ref: "#/components/schemas/delivery_base"
         - $ref: "#/components/schemas/delivery_response_only"
 
@@ -147,6 +147,15 @@ components:
               $ref: "#/components/schemas/delivery_get"
           examples:
             $ref: "deliveries_examples.yaml#/list/200"
+
+    bulk:
+      description: A bulk of deliveries successfully retrieved.
+      content:
+        application/json:
+          schema:
+            type: array
+            items:
+              $ref: "components.yaml#/components/types/id"
 
 
 # =======================
@@ -193,9 +202,30 @@ paths:
         "401":
           $ref: "components.yaml#/components/responses/unauthorized"
 
+  /deliveries/bulk:
+
+    post:
+      operationId: deliveries-bulk-post
+      tags: [ deliveries ]
+      summary: Process a bulk of deliveries.
+      description: Creates a bulk of deliveries in one call.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: array
+              items:
+                $ref: "#/components/schemas/delivery_post"
+      responses:
+        "200":
+          $ref: "#/components/responses/bulk"
+        "401":
+          $ref: "components.yaml#/components/responses/unauthorized"
+
   /deliveries/{id}:
     parameters:
-      - $ref: "components.yaml#/components/parameters/path_id_number"
+      - $ref: "components.yaml#/components/parameters/path_id"
 
     get:
       operationId: deliveries-id-get

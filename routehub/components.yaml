@@ -11,6 +11,10 @@ components:
 
   types:
 
+    id:
+      description: A generic ID definition
+      type: string
+
     length_unit:
       description: Generic length unit enumeration
       type: string
@@ -69,12 +73,13 @@ components:
         message:
           type: string
 
-    id_number:
-      description: Entity Identification by Number
+    entity_id:
+      description: Entity Identification
       type: object
       properties:
         id:
-          type: integer
+          description: Entity Identification
+          $ref: "#/components/types/id"
 
 
   # ----------
@@ -83,13 +88,13 @@ components:
 
   parameters:
 
-    path_id_number:
-      description: Entity Identification by Number
+    path_id:
+      description: Entity Identification
       in: path
       name: id
       required: true
       schema:
-        type: integer
+        $ref: "#/components/types/id"
 
 
   # -------
