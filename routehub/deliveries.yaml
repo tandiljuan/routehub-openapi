@@ -6,8 +6,8 @@ components:
 
   schemas:
 
-    delivery:
-      description: Delivery Entity Definition
+    delivery_base:
+      description: Base Delivery Entity Definition
       type: object
       properties:
         delivery_method:
@@ -16,12 +16,9 @@ components:
             - DELIVERY
             - PICKUP
             - SIGNATURE
-        milestone_id:
-          type: integer
-          description: "Origin"
         destination:
-          type: string
           description: "ISO 6709:DD (Standard representation of geographic point location by coordinates)"
+          type: string
         schedule:
           description: "List of delivery schedules"
           type: array
@@ -62,6 +59,62 @@ components:
             - OUNCES
             - POUNDS
 
+    delivery_submit_only:
+      description: Submit-Only Delivery Entity Definition
+      type: object
+      properties:
+        milestone_id:
+          type: integer
+
+    delivery_response_only:
+      description: Response-Only Delivery Entity Definition
+      type: object
+      properties:
+        milestone:
+          $ref: "milestones.yaml#/components/schemas/milestone_get"
+
+    delivery_get:
+      description: HTTP GET Delivery Entity Definition
+      required:
+        - id
+      allOf:
+        - $ref: "components.yaml#/components/schemas/id_number"
+        - $ref: "#/components/schemas/delivery_base"
+        - $ref: "#/components/schemas/delivery_response_only"
+
+    delivery_patch:
+      description: HTTP PATCH Delivery Entity Definition
+      allOf:
+        - $ref: "#/components/schemas/delivery_base"
+        - $ref: "#/components/schemas/delivery_submit_only"
+
+    delivery_post:
+      description: HTTP POST Delivery Entity Definition
+      allOf:
+        - $ref: "#/components/schemas/delivery_patch"
+
+  responses:
+
+    delivery:
+      description: A delivery successfully retrieved.
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/delivery_get"
+          examples:
+            $ref: "deliveries_examples.yaml#/unit/200"
+
+    delivery_list:
+      description: A list of deliveries successfully retrieved.
+      content:
+        application/json:
+          schema:
+            type: array
+            items:
+              $ref: "#/components/schemas/delivery_get"
+          examples:
+            $ref: "deliveries_examples.yaml#/list/200"
+
 
 # =======================
 # Deliveries Paths (CRUD)
@@ -80,17 +133,7 @@ paths:
       description: Retrieves a list of all delivery entities.
       responses:
         "200":
-          description: A list of deliveries.
-          content:
-            application/json:
-              schema:
-                type: array
-                items:
-                  allOf:
-                    - $ref: "components.yaml#/components/schemas/id_number"
-                    - $ref: "#/components/schemas/delivery"
-              examples:
-                $ref: "deliveries_examples.yaml#/list/200"
+          $ref: "#/components/responses/delivery_list"
         "401":
           $ref: "components.yaml#/components/responses/unauthorized"
 
@@ -104,23 +147,16 @@ paths:
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/delivery"
+              $ref: "#/components/schemas/delivery_post"
             examples:
               $ref: "deliveries_examples.yaml#/request/create"
       responses:
         "201":
-          description: The newly created delivery.
+          description: Delivery successfully created.
           headers:
             Location:
               $ref: "components.yaml#/components/headers/created_url"
-          content:
-            application/json:
-              schema:
-                allOf:
-                  - $ref: "components.yaml#/components/schemas/id_number"
-                  - $ref: "#/components/schemas/delivery"
-              examples:
-                $ref: "deliveries_examples.yaml#/unit/200"
+          $ref: "#/components/responses/delivery"
         "401":
           $ref: "components.yaml#/components/responses/unauthorized"
 
@@ -135,15 +171,8 @@ paths:
       description: Retrieves a specific delivery entity by its ID.
       responses:
         "200":
-          description: The requested delivery.
-          content:
-            application/json:
-              schema:
-                allOf:
-                  - $ref: "components.yaml#/components/schemas/id_number"
-                  - $ref: "#/components/schemas/delivery"
-              examples:
-                $ref: "deliveries_examples.yaml#/unit/200"
+          description: Delivery successfully retrieved.
+          $ref: "#/components/responses/delivery"
         "404":
           $ref: "components.yaml#/components/responses/notfound"
         "401":
@@ -159,20 +188,13 @@ paths:
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/delivery"
+              $ref: "#/components/schemas/delivery_patch"
             examples:
               $ref: "deliveries_examples.yaml#/request/update"
       responses:
         "200":
-          description: The updated delivery.
-          content:
-            application/json:
-              schema:
-                allOf:
-                  - $ref: "components.yaml#/components/schemas/id_number"
-                  - $ref: "#/components/schemas/delivery"
-              examples:
-                $ref: "deliveries_examples.yaml#/unit/200"
+          description: Delivery successfully updated.
+          $ref: "#/components/responses/delivery"
         "404":
           $ref: "components.yaml#/components/responses/notfound"
         "401":
