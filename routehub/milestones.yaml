@@ -71,8 +71,11 @@ paths:
             examples:
               $ref: "milestones_examples.yaml#/request/create"
       responses:
-        "200":
+        "201":
           description: Successfully created milestone with its assigned ID.
+          headers:
+            Location:
+              $ref: "components.yaml#/components/headers/created_url"
           content:
             application/json:
               schema:
@@ -145,13 +148,8 @@ paths:
       description: Deletes an existing milestone identified by its unique ID.
       responses:
         "200":
-          description: Successfully deleted milestone.
-          content:
-            application/json:
-              schema:
-                $ref: "components.yaml#/components/schemas/generic"
-              example:
-                $ref: "components.yaml#/examples/generic/200/value"
+          description: Milestone successfully deleted.
+          $ref: "components.yaml#/components/responses/ok"
         "404":
           $ref: "components.yaml#/components/responses/notfound"
         "401":

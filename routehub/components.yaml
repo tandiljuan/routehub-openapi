@@ -43,11 +43,34 @@ components:
         type: integer
 
 
+  # -------
+  # Headers
+  # -------
+
+  headers:
+
+    created_url:
+      description: URL of the newly created resource.
+      schema:
+        type: string
+
+
   # ---------
   # Responses
   # ---------
 
   responses:
+
+    ok:
+      description: The request was processed successfully.
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/generic"
+            required:
+              - code
+          example:
+            $ref: "#/examples/generic/200/value"
 
     unauthorized:
       description: Invalid or missing access token.

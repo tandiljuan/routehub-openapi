@@ -112,8 +112,11 @@ paths:
             examples:
               $ref: "delivery-lots_examples.yaml#/request/create"
       responses:
-        "200":
+        "201":
           description: The newly created delivery lot.
+          headers:
+            Location:
+              $ref: "components.yaml#/components/headers/created_url"
           content:
             application/json:
               schema:
@@ -186,13 +189,8 @@ paths:
       description: Deletes the delivery lot with the provided ID.
       responses:
         "200":
-          description: Successfully deleted the delivery lot.
-          content:
-            application/json:
-              schema:
-                $ref: "components.yaml#/components/schemas/generic"
-              example:
-                $ref: "components.yaml#/examples/generic/200/value"
+          description: Delivery lot successfully deleted.
+          $ref: "components.yaml#/components/responses/ok"
         "404":
           $ref: "components.yaml#/components/responses/notfound"
         "401":
@@ -227,14 +225,9 @@ paths:
       summary: Generate/Update the delivery plan for a delivery lot.
       description: Generates or updates the delivery plan based on the delivery lot details.
       responses:
-        "200":
-          description: Successfully created/updated the delivery plan.
-          content:
-            application/json:
-              schema:
-                $ref: "components.yaml#/components/schemas/generic"
-              example:
-                $ref: "components.yaml#/examples/generic/200/value"
+        "202":
+          description: Delivery plan successfully created/updated.
+          $ref: "components.yaml#/components/responses/ok"
         "404":
           $ref: "components.yaml#/components/responses/notfound"
         "401":

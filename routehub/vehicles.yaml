@@ -97,8 +97,11 @@ paths:
             examples:
               $ref: "vehicles_examples.yaml#/request/create"
       responses:
-        "200":
-          description: Vehicle successfully added.
+        "201":
+          description: Vehicle successfully created.
+          headers:
+            Location:
+              $ref: "components.yaml#/components/headers/created_url"
           content:
             application/json:
               schema:
@@ -172,12 +175,7 @@ paths:
       responses:
         "200":
           description: Vehicle successfully deleted.
-          content:
-            application/json:
-              schema:
-                $ref: "components.yaml#/components/schemas/generic"
-              example:
-                $ref: "components.yaml#/examples/generic/200/value"
+          $ref: "components.yaml#/components/responses/ok"
         "404":
           $ref: "components.yaml#/components/responses/notfound"
         "401":
