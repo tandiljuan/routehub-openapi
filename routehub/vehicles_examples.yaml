@@ -20,8 +20,8 @@ vehicle:
     name: "pickup-update"
     consumption: 10
   "1.0": &vehicle1.0
-    <<: *payload1.0
     id: 1
+    <<: *payload1.0
   "1.1": &vehicle1.1
     # @see https://yaml.org/type/merge.html
     <<: *payload1.1

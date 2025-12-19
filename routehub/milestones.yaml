@@ -15,7 +15,7 @@ components:
         location:
           description: "ISO 6709:DD (Standard representation of geographic point location by coordinates)"
           type: string
-        milestone_category:
+        category:
           description: The type of location associated with the milestone.
           type: string
           enum:
@@ -30,6 +30,7 @@ components:
       required:
         - id
         - name
+        - location
       allOf:
         - $ref: "components.yaml#/components/schemas/id_number"
         - $ref: "#/components/schemas/milestone_base"
@@ -43,6 +44,7 @@ components:
       description: HTTP POST Milestone Entity Definition
       required:
         - name
+        - location
       allOf:
         - $ref: "#/components/schemas/milestone_patch"
 

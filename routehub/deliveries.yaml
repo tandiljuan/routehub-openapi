@@ -4,6 +4,38 @@
 
 components:
 
+  types:
+
+    packaging:
+      type: string
+      description: |
+        * BOX: Rigid packaging made of cardboard or wood.
+        * ENVELOPE: Flat paper container for documents or mail.
+        * BAG: Flexible container for carrying or holding goods.
+        * CARTON: Lightweight containers made from paperboard.
+        * PALLET: Flat platform for transport & storage of goods.
+        * SHRINK_WRAP: Plastic film for securing items.
+      enum:
+        - BOX
+        - ENVELOPE
+        - BAG
+        - CARTON
+        - PALLET
+        - SHRINK_WRAP
+
+    handling:
+      type: string
+      description: |
+        * FRAGILE: Handle with care, contents easily broken.
+        * PERISHABLE: Goods that require to remain fresh, such as food or pharmaceuticals.
+        * HAZARDOUS: Dangerous goods, handle with extreme caution.
+        * REFRIGERATED: Items that need to be kept at low temperatures at all times.
+      enum:
+        - FRAGILE
+        - PERISHABLE
+        - HAZARDOUS
+        - REFRIGERATED
+
   schemas:
 
     delivery_base:
@@ -19,7 +51,7 @@ components:
         destination:
           description: "ISO 6709:DD (Standard representation of geographic point location by coordinates)"
           type: string
-        schedule:
+        schedules:
           description: "List of delivery schedules"
           type: array
           items:
@@ -32,32 +64,28 @@ components:
         depth:
           type: number
         length_unit:
-          type: string
-          enum:
-            - CENTIMETER
-            - METER
-            - INCH
-            - FEET
+          $ref: "components.yaml#/components/types/length_unit"
         volume:
           type: number
         volume_unit:
-          type: string
-          enum:
-            - CUBIC_CENTIMETER
-            - CUBIC_METER
-            - LITER
-            - CUBIC_INCH
-            - CUBIC_FEET
-            - GALLON
+          $ref: "components.yaml#/components/types/volume_unit"
         weight:
           type: number
         weight_unit:
+          $ref: "components.yaml#/components/types/weight_unit"
+        packaging:
+          $ref: "#/components/types/packaging"
+        handling:
+          type: array
+          items:
+            $ref: "#/components/types/handling"
+        value_cents:
+          type: integer
+        value_currency:
+          description: "ISO 4217 code"
           type: string
-          enum:
-            - GRAMS
-            - KILOGRAMS
-            - OUNCES
-            - POUNDS
+        extra:
+          type: string
 
     delivery_submit_only:
       description: Submit-Only Delivery Entity Definition
@@ -77,6 +105,8 @@ components:
       description: HTTP GET Delivery Entity Definition
       required:
         - id
+        - milestone
+        - destination
       allOf:
         - $ref: "components.yaml#/components/schemas/id_number"
         - $ref: "#/components/schemas/delivery_base"
@@ -90,6 +120,9 @@ components:
 
     delivery_post:
       description: HTTP POST Delivery Entity Definition
+      required:
+        - milestone_id
+        - destination
       allOf:
         - $ref: "#/components/schemas/delivery_patch"
 

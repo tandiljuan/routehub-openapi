@@ -15,14 +15,7 @@ components:
         volume:
           type: number
         volume_unit:
-          type: string
-          enum:
-            - CUBIC_CENTIMETER
-            - CUBIC_METER
-            - LITER
-            - CUBIC_INCH
-            - CUBIC_FEET
-            - GALLON
+          $ref: "components.yaml#/components/types/volume_unit"
         consumption:
           type: number
         consumption_unit:

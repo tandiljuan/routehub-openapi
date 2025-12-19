@@ -13,7 +13,8 @@ driver:
     last_name: "Doe"
     work_schedules:
       - "DTSTART:20250101T120000Z\nDURATION:PT8H\nRRULE:FREQ=DAILY"
-    start_point: "37.7749,-122.4194"
+    start_point: "+37.7749-122.4194/"
+    end_point: "+37.7749-122.4194/"
     work_areas:
       - # Working Area #1
         - "37.7749,-122.4194"
@@ -26,8 +27,8 @@ driver:
     first_name: "Jane"
     last_name: "Smith"
   "1.0": &driver1.0
-    <<: *payload1.0
     id: 1
+    <<: *payload1.0
   "1.1": &driver1.1
     # @see https://yaml.org/type/merge.html
     <<: *payload1.1

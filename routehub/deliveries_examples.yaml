@@ -11,8 +11,8 @@ delivery:
   "payload1.0": &payload1.0
     delivery_method: "DELIVERY"
     milestone_id: 1
-    destination: "37.7749,-122.4194"
-    schedule: ["DTSTART:20240704T120000Z"]
+    destination: "+37.7749-122.4194/"
+    schedules: ["DTSTART:20240704T120000Z"]
     width: 10
     height: 20
     depth: 30
@@ -21,6 +21,9 @@ delivery:
     volume_unit: "CUBIC_CENTIMETER"
     weight: 1000
     weight_unit: "GRAMS"
+    packaging: "BOX"
+    value_cents: "2500"
+    value_currency: "USD"
   "payload1.1": &payload1.1
     width: 15
     height: 25
@@ -28,8 +31,8 @@ delivery:
     volume: 6500
     weight: 1500
   "1.0": &delivery1.0
-    <<: *payload1.0
     id: 1
+    <<: *payload1.0
   "1.1": &delivery1.1
     # @see https://yaml.org/type/merge.html
     <<: *payload1.1
