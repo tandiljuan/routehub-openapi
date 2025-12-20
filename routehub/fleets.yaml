@@ -10,9 +10,10 @@ components:
       description: Base Fleet-Vehicle Entity Definition
       type: object
       required:
-        - quantity
+        - qty
       properties:
-        quantity:
+        qty:
+          description: Vehicle quantity
           type: integer
 
     fleet_vehicle_submit_only:
