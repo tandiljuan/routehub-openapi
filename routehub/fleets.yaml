@@ -20,10 +20,11 @@ components:
       description: Submit-Only Fleet-Vehicle Entity Definition
       type: object
       required:
-        - vehicle_id
+        - id
       properties:
-        vehicle_id:
-          type: integer
+        id:
+          description: Vehicle ID
+          $ref: "components.yaml#/components/types/id"
 
     fleet_base:
       description: Base Fleet Entity Definition
