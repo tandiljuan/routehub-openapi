@@ -19,6 +19,14 @@ vehicle:
   "payload1.1": &payload1.1
     name: "pickup-update"
     consumption: 10
+  "payload2.0": &payload2.0
+    name: "truck"
+    category_type: "TRUCK"
+    engine_type: "DIESEL"
+  "payload3.0": &payload3.0
+    name: "van"
+    category_type: "VAN"
+    engine_type: "DIESEL"
   "1.0": &vehicle1.0
     id: 1
     <<: *payload1.0
