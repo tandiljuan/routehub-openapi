@@ -35,7 +35,7 @@ components:
         last_name:
           type: string
         work_schedules:
-          description: "List of work schedules"
+          description: "List of work schedules (RFC 5545)"
           type: array
           items:
             description: "RFC 5545 (iCalendar: Internet Calendaring and Scheduling Core Object Specification)"
