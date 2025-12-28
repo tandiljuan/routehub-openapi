@@ -42,7 +42,8 @@ components:
       description: Base Delivery Entity Definition
       type: object
       properties:
-        delivery_method:
+        method:
+          description: "The delivery method defines the type of fulfillment service"
           type: string
           enum:
             - DELIVERY
