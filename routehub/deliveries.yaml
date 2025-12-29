@@ -86,7 +86,13 @@ components:
           description: "ISO 4217 code"
           type: string
         extra:
-          type: string
+          oneOf:
+            - type: string
+            - type: integer
+            - type: number
+            - type: boolean
+            - type: array
+            - type: object
 
     delivery_submit_only:
       description: Submit-Only Delivery Entity Definition
