@@ -113,7 +113,6 @@ components:
       description: HTTP GET Delivery Entity Definition
       required:
         - id
-        - milestone
         - destination
       allOf:
         - $ref: "components.yaml#/components/schemas/entity_id"
