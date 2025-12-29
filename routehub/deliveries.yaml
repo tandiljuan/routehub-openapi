@@ -99,7 +99,8 @@ components:
       type: object
       properties:
         milestone_id:
-          type: integer
+          description: Milestone ID
+          $ref: "components.yaml#/components/types/id"
 
     delivery_response_only:
       description: Response-Only Delivery Entity Definition
