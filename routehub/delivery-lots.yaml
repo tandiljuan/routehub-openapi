@@ -114,6 +114,7 @@ components:
         - milestone
         - deliveries
         - state
+        - fleet
       allOf:
         - $ref: "components.yaml#/components/schemas/entity_id"
         - $ref: "#/components/schemas/delivery_lot_response_only"
@@ -130,6 +131,7 @@ components:
       required:
         - milestone_id
         - deliveries
+        - fleet_id
       allOf:
         - $ref: "#/components/schemas/delivery_lot_patch"
 
