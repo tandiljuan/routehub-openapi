@@ -61,20 +61,22 @@ components:
       properties:
         milestone_id:
           description: "Location from which the deliveries will depart."
-          type: integer
+          $ref: "components.yaml#/components/types/id"
         deliveries:
           description: "List of deliveries in the lot."
           type: array
           items:
-            type: integer
+            description: "Delivery ID"
+            $ref: "components.yaml#/components/types/id"
         fleet_id:
           description: "Fleet designated for distribution."
-          type: integer
+          $ref: "components.yaml#/components/types/id"
         drivers:
           description: "List of drivers designated for distribution tasks."
           type: array
           items:
-            type: integer
+            description: "Driver ID"
+            $ref: "components.yaml#/components/types/id"
 
     delivery_lot_response_only:
       description: Response-Only Delivery Lot Entity Definition
