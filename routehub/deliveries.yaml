@@ -42,7 +42,8 @@ components:
       description: Base Delivery Entity Definition
       type: object
       properties:
-        delivery_method:
+        method:
+          description: "The delivery method defines the type of fulfillment service"
           type: string
           enum:
             - DELIVERY
@@ -85,14 +86,21 @@ components:
           description: "ISO 4217 code"
           type: string
         extra:
-          type: string
+          oneOf:
+            - type: string
+            - type: integer
+            - type: number
+            - type: boolean
+            - type: array
+            - type: object
 
     delivery_submit_only:
       description: Submit-Only Delivery Entity Definition
       type: object
       properties:
         milestone_id:
-          type: integer
+          description: Milestone ID
+          $ref: "components.yaml#/components/types/id"
 
     delivery_response_only:
       description: Response-Only Delivery Entity Definition
@@ -105,7 +113,6 @@ components:
       description: HTTP GET Delivery Entity Definition
       required:
         - id
-        - milestone
         - destination
       allOf:
         - $ref: "components.yaml#/components/schemas/entity_id"
