@@ -10,19 +10,21 @@ components:
       description: Base Driver-Vehicle Entity Definition
       type: object
       required:
-        - quantity
+        - qty
       properties:
-        quantity:
+        qty:
+          description: Vehicle quantity
           type: integer
 
     driver_vehicle_submit_only:
       description: Submit-Only Driver-Vehicle Entity Definition
       type: object
       required:
-        - vehicle_id
+        - id
       properties:
-        vehicle_id:
-          type: integer
+        id:
+          description: Vehicle ID
+          $ref: "components.yaml#/components/types/id"
 
     driver_base:
       description: Base Driver Entity Definition
@@ -63,7 +65,9 @@ components:
       type: object
       properties:
         vehicles:
+          description: A list of driver's vehicles and their quantities
           type: array
+          minItems: 1
           items:
             allOf:
               - $ref: "#/components/schemas/driver_vehicle_base"
@@ -74,7 +78,9 @@ components:
       type: object
       properties:
         vehicles:
+          description: A list of driver's vehicles and their quantities
           type: array
+          minItems: 1
           items:
             allOf:
               - $ref: "#/components/schemas/driver_vehicle_base"
