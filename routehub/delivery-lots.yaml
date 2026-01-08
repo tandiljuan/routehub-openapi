@@ -312,20 +312,6 @@ paths:
     parameters:
       - $ref: "components.yaml#/components/parameters/path_id"
 
-    get:
-      operationId: delivery-lots-plan-get
-      tags: [ delivery-lots ]
-      summary: Retrieve the delivery plan for a delivery lot.
-      description: Returns the delivery plan associated with a specific delivery lot ID.
-      responses:
-        "200":
-          description: Delivery plan successfully retrieved.
-          $ref: "#/components/responses/delivery_plan"
-        "404":
-          $ref: "components.yaml#/components/responses/notfound"
-        "401":
-          $ref: "components.yaml#/components/responses/unauthorized"
-
     post:
       operationId: delivery-lots-plan-post
       tags: [ delivery-lots ]
@@ -335,6 +321,20 @@ paths:
         "202":
           description: Delivery plan successfully created/updated.
           $ref: "components.yaml#/components/responses/ok"
+        "404":
+          $ref: "components.yaml#/components/responses/notfound"
+        "401":
+          $ref: "components.yaml#/components/responses/unauthorized"
+
+    get:
+      operationId: delivery-lots-plan-get
+      tags: [ delivery-lots ]
+      summary: Retrieve the delivery plan for a delivery lot.
+      description: Returns the delivery plan associated with a specific delivery lot ID.
+      responses:
+        "200":
+          description: Delivery plan successfully retrieved.
+          $ref: "#/components/responses/delivery_plan"
         "404":
           $ref: "components.yaml#/components/responses/notfound"
         "401":
