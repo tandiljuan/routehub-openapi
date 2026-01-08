@@ -141,8 +141,8 @@ components:
       allOf:
         - $ref: "#/components/schemas/delivery_lot_patch"
 
-    delivery_path_response_only:
-      description: Response-Only Delivery Path Entity Definition
+    delivery_route_response_only:
+      description: Response-Only Delivery Route Entity Definition
       type: object
       required:
         - milestone
@@ -168,16 +168,15 @@ components:
       type: object
       required:
         - delivery_lot_id
-        - delivery_paths
       properties:
         delivery_lot_id:
           description: "Delivery lot from which the plan is created."
           type: integer
-        delivery_paths:
-          description: "List of delivery paths."
+        routes:
+          description: "List of delivery routes."
           type: array
           items:
-            $ref: "#/components/schemas/delivery_path_response_only"
+            $ref: "#/components/schemas/delivery_route_response_only"
 
     delivery_plan_get:
       description: HTTP GET Delivery Plan Entity Definition
