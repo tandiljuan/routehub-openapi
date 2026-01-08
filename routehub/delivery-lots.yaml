@@ -4,6 +4,17 @@
 
 components:
 
+  types:
+
+    state:
+      description: "Specifies the element’s current lifecycle stage."
+      type: string
+      enum:
+        - UNPROCESSED
+        - PROCESSING
+        - PROCESSED
+        - CANCELED
+
   schemas:
 
     delivery_lot_base:
@@ -100,12 +111,7 @@ components:
             $ref: "drivers.yaml#/components/schemas/driver_get"
         state:
           description: "Current status of the delivery lot."
-          type: string
-          enum:
-            - UNPROCESSED
-            - PROCESSING
-            - PROCESSED
-            - CANCELED
+          $ref: "#/components/types/state"
 
     delivery_lot_get:
       description: HTTP GET Delivery Lot Entity Definition
