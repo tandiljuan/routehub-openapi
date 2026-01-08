@@ -146,7 +146,7 @@ components:
       type: object
       required:
         - milestone
-        - delivery_units
+        - deliveries
       properties:
         milestone:
           description: "Location from which the delivery will depart."
@@ -157,7 +157,7 @@ components:
         driver:
           description: "Driver assigned to the delivery."
           $ref: "drivers.yaml#/components/schemas/driver_get"
-        delivery_units:
+        deliveries:
           description: "List of items to be delivered."
           type: array
           items:
