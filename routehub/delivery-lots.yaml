@@ -4,6 +4,17 @@
 
 components:
 
+  types:
+
+    state:
+      description: "Specifies the element’s current lifecycle stage."
+      type: string
+      enum:
+        - UNPROCESSED
+        - PROCESSING
+        - PROCESSED
+        - CANCELED
+
   schemas:
 
     delivery_lot_base:
@@ -100,12 +111,7 @@ components:
             $ref: "drivers.yaml#/components/schemas/driver_get"
         state:
           description: "Current status of the delivery lot."
-          type: string
-          enum:
-            - UNPROCESSED
-            - PROCESSING
-            - PROCESSED
-            - CANCELED
+          $ref: "#/components/types/state"
 
     delivery_lot_get:
       description: HTTP GET Delivery Lot Entity Definition
@@ -135,12 +141,12 @@ components:
       allOf:
         - $ref: "#/components/schemas/delivery_lot_patch"
 
-    delivery_path_response_only:
-      description: Response-Only Delivery Path Entity Definition
+    delivery_route_response_only:
+      description: Response-Only Delivery Route Entity Definition
       type: object
       required:
         - milestone
-        - delivery_units
+        - deliveries
       properties:
         milestone:
           description: "Location from which the delivery will depart."
@@ -151,7 +157,7 @@ components:
         driver:
           description: "Driver assigned to the delivery."
           $ref: "drivers.yaml#/components/schemas/driver_get"
-        delivery_units:
+        deliveries:
           description: "List of items to be delivered."
           type: array
           items:
@@ -161,17 +167,16 @@ components:
       description: Response-Only Delivery Plan Entity Definition
       type: object
       required:
-        - delivery_lot_id
-        - delivery_paths
+        - state
       properties:
-        delivery_lot_id:
-          description: "Delivery lot from which the plan is created."
-          type: integer
-        delivery_paths:
-          description: "List of delivery paths."
+        state:
+          description: "Current status of the delivery plan."
+          $ref: "#/components/types/state"
+        routes:
+          description: "List of delivery routes."
           type: array
           items:
-            $ref: "#/components/schemas/delivery_path_response_only"
+            $ref: "#/components/schemas/delivery_route_response_only"
 
     delivery_plan_get:
       description: HTTP GET Delivery Plan Entity Definition
@@ -312,20 +317,6 @@ paths:
     parameters:
       - $ref: "components.yaml#/components/parameters/path_id"
 
-    get:
-      operationId: delivery-lots-plan-get
-      tags: [ delivery-lots ]
-      summary: Retrieve the delivery plan for a delivery lot.
-      description: Returns the delivery plan associated with a specific delivery lot ID.
-      responses:
-        "200":
-          description: Delivery plan successfully retrieved.
-          $ref: "#/components/responses/delivery_plan"
-        "404":
-          $ref: "components.yaml#/components/responses/notfound"
-        "401":
-          $ref: "components.yaml#/components/responses/unauthorized"
-
     post:
       operationId: delivery-lots-plan-post
       tags: [ delivery-lots ]
@@ -335,6 +326,20 @@ paths:
         "202":
           description: Delivery plan successfully created/updated.
           $ref: "components.yaml#/components/responses/ok"
+        "404":
+          $ref: "components.yaml#/components/responses/notfound"
+        "401":
+          $ref: "components.yaml#/components/responses/unauthorized"
+
+    get:
+      operationId: delivery-lots-plan-get
+      tags: [ delivery-lots ]
+      summary: Retrieve the delivery plan for a delivery lot.
+      description: Returns the delivery plan associated with a specific delivery lot ID.
+      responses:
+        "200":
+          description: Delivery plan successfully retrieved.
+          $ref: "#/components/responses/delivery_plan"
         "404":
           $ref: "components.yaml#/components/responses/notfound"
         "401":
