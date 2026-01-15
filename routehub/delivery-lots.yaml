@@ -167,11 +167,7 @@ components:
       description: Response-Only Delivery Plan Entity Definition
       type: object
       required:
-        - delivery_lot_id
       properties:
-        delivery_lot_id:
-          description: "Delivery lot from which the plan is created."
-          type: integer
         routes:
           description: "List of delivery routes."
           type: array
