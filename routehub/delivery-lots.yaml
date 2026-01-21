@@ -184,6 +184,14 @@ components:
         - $ref: "components.yaml#/components/schemas/entity_id"
         - $ref: "#/components/schemas/delivery_route_response_only"
 
+    delivery_route_patch:
+      description: HTTP PATCH Delivery Route Entity Definition
+      required:
+        - id
+        - deliveries
+      allOf:
+        - $ref: "#/components/schemas/delivery_route_submit_only"
+
     delivery_plan_response_only:
       description: Response-Only Delivery Plan Entity Definition
       type: object
