@@ -163,9 +163,11 @@ components:
     delivery_route_get:
       description: HTTP GET Delivery Route Entity Definition
       required:
+        - id
         - milestone
         - deliveries
       allOf:
+        - $ref: "components.yaml#/components/schemas/entity_id"
         - $ref: "#/components/schemas/delivery_route_response_only"
 
     delivery_plan_response_only:
