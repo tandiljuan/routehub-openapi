@@ -141,6 +141,20 @@ components:
       allOf:
         - $ref: "#/components/schemas/delivery_lot_patch"
 
+    delivery_route_submit_only:
+      description: Submit-Only Delivery Route Entity Definition
+      type: object
+      properties:
+        id:
+          description: Route ID
+          $ref: "components.yaml#/components/types/id"
+        deliveries:
+          description: "List of deliveries in the route."
+          type: array
+          items:
+            description: "Delivery ID"
+            $ref: "components.yaml#/components/types/id"
+
     delivery_route_response_only:
       description: Response-Only Delivery Route Entity Definition
       type: object
