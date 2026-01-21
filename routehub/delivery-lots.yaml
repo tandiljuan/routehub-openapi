@@ -12,6 +12,7 @@ components:
       enum:
         - UNPROCESSED
         - PROCESSING
+        - OPTIMIZING
         - PROCESSED
         - CANCELED
 
