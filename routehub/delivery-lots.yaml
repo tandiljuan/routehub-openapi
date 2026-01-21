@@ -144,9 +144,6 @@ components:
     delivery_route_response_only:
       description: Response-Only Delivery Route Entity Definition
       type: object
-      required:
-        - milestone
-        - deliveries
       properties:
         milestone:
           description: "Location from which the delivery will depart."
@@ -163,6 +160,14 @@ components:
           items:
             $ref: "deliveries.yaml#/components/schemas/delivery_get"
 
+    delivery_route_get:
+      description: HTTP GET Delivery Route Entity Definition
+      required:
+        - milestone
+        - deliveries
+      allOf:
+        - $ref: "#/components/schemas/delivery_route_response_only"
+
     delivery_plan_response_only:
       description: Response-Only Delivery Plan Entity Definition
       type: object
@@ -174,7 +179,7 @@ components:
           description: "List of delivery routes."
           type: array
           items:
-            $ref: "#/components/schemas/delivery_route_response_only"
+            $ref: "#/components/schemas/delivery_route_get"
 
     delivery_plan_get:
       description: HTTP GET Delivery Plan Entity Definition
