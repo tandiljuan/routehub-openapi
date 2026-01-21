@@ -166,8 +166,6 @@ components:
     delivery_plan_response_only:
       description: Response-Only Delivery Plan Entity Definition
       type: object
-      required:
-        - state
       properties:
         state:
           description: "Current status of the delivery plan."
@@ -180,6 +178,8 @@ components:
 
     delivery_plan_get:
       description: HTTP GET Delivery Plan Entity Definition
+      required:
+        - state
       allOf:
         - $ref: "#/components/schemas/delivery_plan_response_only"
 
