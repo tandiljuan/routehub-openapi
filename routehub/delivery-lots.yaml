@@ -191,8 +191,8 @@ components:
         application/json:
           schema:
             $ref: "#/components/schemas/delivery_lot_get"
-          examples:
-            $ref: "delivery-lots_examples.yaml#/lot/200"
+          #examples:
+          #  $ref: "delivery-lots_examples.yaml#/lot/200"
 
     delivery_lot_list:
       description: A list of delivery lots successfully retrieved.
@@ -202,8 +202,8 @@ components:
             type: array
             items:
               $ref: "#/components/schemas/delivery_lot_get"
-          examples:
-            $ref: "delivery-lots_examples.yaml#/list/200"
+          #examples:
+          #  $ref: "delivery-lots_examples.yaml#/list/200"
 
     delivery_plan:
       description: A delivery plan successfully retrieved.
@@ -211,8 +211,8 @@ components:
         application/json:
           schema:
             $ref: "#/components/schemas/delivery_plan_get"
-          examples:
-            $ref: "delivery-lots_examples.yaml#/plan/200"
+          #examples:
+          #  $ref: "delivery-lots_examples.yaml#/plan/200"
 
 
 # ==========================
@@ -247,8 +247,8 @@ paths:
           application/json:
             schema:
               $ref: "#/components/schemas/delivery_lot_post"
-            examples:
-              $ref: "delivery-lots_examples.yaml#/request/create"
+            #examples:
+            #  $ref: "delivery-lots_examples.yaml#/request/create"
       responses:
         "201":
           description: Delivery lot successfully created.
@@ -288,8 +288,8 @@ paths:
           application/json:
             schema:
               $ref: "#/components/schemas/delivery_lot_patch"
-            examples:
-              $ref: "delivery-lots_examples.yaml#/request/update"
+            #examples:
+            #  $ref: "delivery-lots_examples.yaml#/request/update"
       responses:
         "200":
           description: Delivery lot successfully updated.
