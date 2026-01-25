@@ -115,6 +115,14 @@ components:
 
   responses:
 
+    generic:
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/generic"
+            required:
+              - code
+
     ok:
       description: The request was processed successfully.
       content:
