@@ -17,17 +17,21 @@ driver:
     end_point: "+37.7749-122.4194/"
     work_areas:
       - # Working Area #1
-        - "37.7749,-122.4194"
-        - "37.7749,-122.4195"
-        - "37.7750,-122.4194"
+        - "+37.7749-122.4194/"
+        - "+37.7749-122.4195/"
+        - "+37.7750-122.4194/"
     vehicles:
-      - vehicle_id: 1
-        quantity: 2
+      - id: "1"
+        qty: 2
   "payload1.1": &payload1.1
     first_name: "Jane"
     last_name: "Smith"
   "1.0": &driver1.0
-    id: 1
+    id: "1"
+    vehicles:
+      - id: "1"
+        qty: 2
+        name: "pickup"
     <<: *payload1.0
   "1.1": &driver1.1
     # @see https://yaml.org/type/merge.html

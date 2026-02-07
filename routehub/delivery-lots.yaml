@@ -12,6 +12,7 @@ components:
       enum:
         - UNPROCESSED
         - PROCESSING
+        - OPTIMIZING
         - PROCESSED
         - CANCELED
 
@@ -141,12 +142,23 @@ components:
       allOf:
         - $ref: "#/components/schemas/delivery_lot_patch"
 
+    delivery_route_submit_only:
+      description: Submit-Only Delivery Route Entity Definition
+      type: object
+      properties:
+        id:
+          description: Route ID
+          $ref: "components.yaml#/components/types/id"
+        deliveries:
+          description: "List of deliveries in the route."
+          type: array
+          items:
+            description: "Delivery ID"
+            $ref: "components.yaml#/components/types/id"
+
     delivery_route_response_only:
       description: Response-Only Delivery Route Entity Definition
       type: object
-      required:
-        - milestone
-        - deliveries
       properties:
         milestone:
           description: "Location from which the delivery will depart."
@@ -163,11 +175,27 @@ components:
           items:
             $ref: "deliveries.yaml#/components/schemas/delivery_get"
 
+    delivery_route_get:
+      description: HTTP GET Delivery Route Entity Definition
+      required:
+        - id
+        - milestone
+        - deliveries
+      allOf:
+        - $ref: "components.yaml#/components/schemas/entity_id"
+        - $ref: "#/components/schemas/delivery_route_response_only"
+
+    delivery_route_patch:
+      description: HTTP PATCH Delivery Route Entity Definition
+      required:
+        - id
+        - deliveries
+      allOf:
+        - $ref: "#/components/schemas/delivery_route_submit_only"
+
     delivery_plan_response_only:
       description: Response-Only Delivery Plan Entity Definition
       type: object
-      required:
-        - state
       properties:
         state:
           description: "Current status of the delivery plan."
@@ -176,10 +204,12 @@ components:
           description: "List of delivery routes."
           type: array
           items:
-            $ref: "#/components/schemas/delivery_route_response_only"
+            $ref: "#/components/schemas/delivery_route_get"
 
     delivery_plan_get:
       description: HTTP GET Delivery Plan Entity Definition
+      required:
+        - state
       allOf:
         - $ref: "#/components/schemas/delivery_plan_response_only"
 
@@ -191,8 +221,8 @@ components:
         application/json:
           schema:
             $ref: "#/components/schemas/delivery_lot_get"
-          examples:
-            $ref: "delivery-lots_examples.yaml#/lot/200"
+          #examples:
+          #  $ref: "delivery-lots_examples.yaml#/lot/200"
 
     delivery_lot_list:
       description: A list of delivery lots successfully retrieved.
@@ -202,8 +232,8 @@ components:
             type: array
             items:
               $ref: "#/components/schemas/delivery_lot_get"
-          examples:
-            $ref: "delivery-lots_examples.yaml#/list/200"
+          #examples:
+          #  $ref: "delivery-lots_examples.yaml#/list/200"
 
     delivery_plan:
       description: A delivery plan successfully retrieved.
@@ -211,8 +241,8 @@ components:
         application/json:
           schema:
             $ref: "#/components/schemas/delivery_plan_get"
-          examples:
-            $ref: "delivery-lots_examples.yaml#/plan/200"
+          #examples:
+          #  $ref: "delivery-lots_examples.yaml#/plan/200"
 
 
 # ==========================
@@ -247,8 +277,8 @@ paths:
           application/json:
             schema:
               $ref: "#/components/schemas/delivery_lot_post"
-            examples:
-              $ref: "delivery-lots_examples.yaml#/request/create"
+            #examples:
+            #  $ref: "delivery-lots_examples.yaml#/request/create"
       responses:
         "201":
           description: Delivery lot successfully created.
@@ -288,8 +318,8 @@ paths:
           application/json:
             schema:
               $ref: "#/components/schemas/delivery_lot_patch"
-            examples:
-              $ref: "delivery-lots_examples.yaml#/request/update"
+            #examples:
+            #  $ref: "delivery-lots_examples.yaml#/request/update"
       responses:
         "200":
           description: Delivery lot successfully updated.
@@ -344,3 +374,29 @@ paths:
           $ref: "components.yaml#/components/responses/notfound"
         "401":
           $ref: "components.yaml#/components/responses/unauthorized"
+
+    patch:
+      operationId: delivery-lots-plan-patch
+      tags: [ delivery-lots ]
+      summary: Reprocess routes in a delivery lot.
+      description: Accept a list of updated routes for reprocessing.
+      requestBody:
+        description: List of updated routes.
+        required: true
+        content:
+          application/json:
+            schema:
+              type: array
+              items:
+                $ref: "#/components/schemas/delivery_route_patch"
+      responses:
+        "202":
+          description: Routes successfully received.
+          $ref: "components.yaml#/components/responses/ok"
+        "404":
+          $ref: "components.yaml#/components/responses/notfound"
+        "401":
+          $ref: "components.yaml#/components/responses/unauthorized"
+        "409":
+          description: Routes cannot be processed.
+          $ref: "components.yaml#/components/responses/generic"

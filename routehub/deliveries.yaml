@@ -141,8 +141,8 @@ components:
         application/json:
           schema:
             $ref: "#/components/schemas/delivery_get"
-          examples:
-            $ref: "deliveries_examples.yaml#/unit/200"
+          #examples:
+          #  $ref: "deliveries_examples.yaml#/unit/200"
 
     delivery_list:
       description: A list of deliveries successfully retrieved.
@@ -152,8 +152,8 @@ components:
             type: array
             items:
               $ref: "#/components/schemas/delivery_get"
-          examples:
-            $ref: "deliveries_examples.yaml#/list/200"
+          #examples:
+          #  $ref: "deliveries_examples.yaml#/list/200"
 
     bulk:
       description: A bulk of deliveries successfully retrieved.
@@ -197,8 +197,8 @@ paths:
           application/json:
             schema:
               $ref: "#/components/schemas/delivery_post"
-            examples:
-              $ref: "deliveries_examples.yaml#/request/create"
+            #examples:
+            #  $ref: "deliveries_examples.yaml#/request/create"
       responses:
         "201":
           description: Delivery successfully created.
@@ -259,8 +259,8 @@ paths:
           application/json:
             schema:
               $ref: "#/components/schemas/delivery_patch"
-            examples:
-              $ref: "deliveries_examples.yaml#/request/update"
+            #examples:
+            #  $ref: "deliveries_examples.yaml#/request/update"
       responses:
         "200":
           description: Delivery successfully updated.

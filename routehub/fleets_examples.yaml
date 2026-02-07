@@ -11,17 +11,25 @@ fleet:
   "payload1.0": &payload1.0
     name: "my-fleet"
     vehicles:
-      - vehicle_id: 1
-        quantity: 2
+      - id: "1"
+        qty: 2
   "payload1.1": &payload1.1
     name: "my-fleet-update"
     vehicles:
-      - vehicle_id: 2
-        quantity: 3
+      - id: "2"
+        qty: 3
   "1.0": &fleet1.0
-    id: 1
+    id: "1"
+    vehicles:
+      - id: "1"
+        qty: 2
+        name: "pickup"
     <<: *payload1.0
   "1.1": &fleet1.1
+    vehicles:
+      - id: "2"
+        qty: 3
+        name: "truck"
     # @see https://yaml.org/type/merge.html
     <<: *payload1.1
     <<: *fleet1.0
