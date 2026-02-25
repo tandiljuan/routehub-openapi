@@ -41,11 +41,9 @@ components:
             description: "RFC 5545 (iCalendar: Internet Calendaring and Scheduling Core Object Specification)"
             type: string
         start_point:
-          description: "ISO 6709:DD (Standard representation of geographic point location by coordinates)"
-          type: string
+          $ref: "components.yaml#/components/types/geo_point"
         end_point:
-          description: "ISO 6709:DD (Standard representation of geographic point location by coordinates)"
-          type: string
+          $ref: "components.yaml#/components/types/geo_point"
         work_areas:
           description: "A collection of geographic working areas."
           type: array
@@ -57,8 +55,7 @@ components:
             type: array
             minItems: 3
             items:
-              description: "ISO 6709:DD (geographic point)"
-              type: string
+              $ref: "components.yaml#/components/types/geo_point"
 
     driver_submit_only:
       description: Submit-Only Driver Entity Definition
