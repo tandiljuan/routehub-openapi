@@ -15,6 +15,14 @@ components:
       description: A generic ID definition
       type: string
 
+    geo_point:
+      description: |
+        Latitude and longitude in **ISO 6709 Decimal Degree format**, with up to 7 decimal places of precision
+      type: string
+      # https://regex101.com/r/lZBcin
+      pattern: '^([+-]?\d{1,2}(?:\.\d+)?)([+-]\d{1,3}(?:\.\d+)?)\/?$'
+      example: '-37.328691-59.136941'
+
     length_unit:
       description: Generic length unit enumeration
       type: string
