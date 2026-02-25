@@ -50,8 +50,7 @@ components:
             - PICKUP
             - SIGNATURE
         destination:
-          description: "ISO 6709:DD (Standard representation of geographic point location by coordinates)"
-          type: string
+          $ref: "components.yaml#/components/types/geo_point"
         schedules:
           description: "List of delivery schedules"
           type: array
