@@ -13,8 +13,7 @@ components:
         name:
           type: string
         location:
-          description: "ISO 6709:DD (Standard representation of geographic point location by coordinates)"
-          type: string
+          $ref: "components.yaml#/components/types/geo_point"
         category:
           description: The type of location associated with the milestone.
           type: string

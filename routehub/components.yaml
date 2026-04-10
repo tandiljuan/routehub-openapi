@@ -15,6 +15,36 @@ components:
       description: A generic ID definition
       type: string
 
+    geo_point:
+      description: |
+        Latitude and longitude in **ISO 6709 Decimal Degree format**, with up to 7 decimal places of precision
+      type: string
+      # https://regex101.com/r/lZBcin
+      pattern: '^([+-]?\d{1,2}(?:\.\d+)?)([+-]\d{1,3}(?:\.\d+)?)\/?$'
+      example: '-37.328691-59.136941'
+
+    event:
+      description: |
+        A `VEVENT` component as defined in RFC 5545 (iCalendar), describing a single event.
+
+        Supported properties:
+
+        * `DTSTART` (required)
+        * `DTEND` or `DURATION` (mutually exclusive)
+        * `RRULE`
+        * `RDATE`
+        * `EXRULE`
+        * `EXDATE`
+
+        Unsupported properties are ignored.
+      type: string
+      # https://regex101.com/r/fa36IA
+      pattern: '^((?:[A-Z-]+)(?:;(?:[^:\r\n]+))?(?::(?:.*))?(?:\r?\n)*)+$'
+      example: |
+        DTSTART:20240205T100000
+        DURATION:PT2H
+        RRULE:FREQ=WEEKLY;BYDAY=MO,TU,WE,TH,FR
+
     length_unit:
       description: Generic length unit enumeration
       type: string
