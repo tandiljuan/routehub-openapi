@@ -131,6 +131,46 @@ components:
       allOf:
         - $ref: "#/components/schemas/delivery_patch"
 
+    bulk_success:
+      description: Bulk Success Entity Definition
+      type: object
+      required:
+        - idx
+        - id
+      properties:
+        idx:
+          description: Index of the element in the bulk lot
+          type: integer
+        id:
+          description: ID of the created element
+          type: string
+
+    bulk_failure:
+      description: Bulk Failure Entity Definition
+      type: object
+      required:
+        - idx
+        - err
+      properties:
+        idx:
+          description: Index of the element in the bulk lot
+          type: integer
+        err:
+          description: List of errors for the failed element
+          type: array
+          items:
+            type: object
+            properties:
+              msg:
+                description: Error message
+                type: string
+              imp:
+                description: The original failed data
+                type: any
+              loc:
+                description: Location of the failed data
+                type: any
+
   responses:
 
     delivery:
@@ -154,13 +194,23 @@ components:
           #  $ref: "deliveries_examples.yaml#/list/200"
 
     bulk:
-      description: A bulk of deliveries successfully retrieved.
+      description: Successful and failed deliveries from the bulk lot.
       content:
         application/json:
           schema:
-            type: array
-            items:
-              $ref: "components.yaml#/components/types/id"
+            type: object
+            required:
+              - success
+              - failure
+            properties:
+              success:
+                type: array
+                items:
+                  $ref: "#/components/schemas/bulk_success"
+              failure:
+                type: array
+                items:
+                  $ref: "#/components/schemas/bulk_failure"
 
 
 # =======================
